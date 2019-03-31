@@ -25,6 +25,10 @@
             font-style:italic;
             font-size:large;
         }
+
+        ul[type="none"] li{
+            padding-bottom:6px;
+        }
         
         </style>
       <h3 class="auto-style2">RF Unit</h3>
@@ -70,5 +74,22 @@
                 Medical Insurance
             </a>
         </li>
+
+        <li>
+            <img src="" />
+        </li>
+
+     </ul>
+    <ul type="none">
+        <h3>Contact</h3>
+        <li>NCCB Retirement Fund Unit</li>
+        <li>NCC Bank Ltd., Head Office, Bagbazar, KTM.</li>
+        <li>Tel : 977-01-4246991, Ext. 125 & 411, Fax: 977-01-4262843</li>
+        <li>E-mail: nccbrf@nccbank.com.np,  Web: www.nccbank.com.np</li>
+        <li>Unit Head – Mr. Prem Krishna Barahi</li>
+
+    </ul>
+
+
 </asp:Content>
 
