@@ -1,0 +1,328 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Main.master.cs" Inherits="Main" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<script language="JavaScript">
+    function showDate() {
+        var now = new Date();
+        var days = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+        var months = new Array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
+        var date = ((now.getDate() < 10) ? "0" : "") + now.getDate();
+        function fourdigits(number) {
+            return (number < 1000) ? number + 1900 : number;
+        }
+
+        tnow = new Date();
+        thour = now.getHours();
+        tmin = now.getMinutes();
+        tsec = now.getSeconds();
+
+        if (tmin <= 9) { tmin = "0" + tmin; }
+        if (tsec <= 9) { tsec = "0" + tsec; }
+        if (thour < 10) { thour = "0" + thour; }
+
+        //today = days[now.getDay()] + ", " + date + " " + months[now.getMonth()] + ", " + (fourdigits(now.getYear())) + " - " + thour + ":" + tmin + ":" + tsec;
+        today = days[now.getDay()] + ", " + date + " " + months[now.getMonth()] + ", " + (fourdigits(now.getYear()));
+        document.getElementById("dateDiv").innerHTML = today;
+    }
+    setInterval("showDate()", 1000);
+</script>
+<head runat="server">
+    <title>||NCC Intranet||</title>
+    
+    <link href="Style.css" rel="stylesheet" type="text/css" />
+    <script src="js/alertify.min.js"></script>
+    <link href="css/alertify.min.css" rel="stylesheet" />
+
+    <%-- JSDatePickerin TextBox --%>
+    <link href="js/jquery-ui.css" rel="stylesheet" />
+    <script src="js/jquery-1.8.2.js"></script>
+    <script src="js/jquery-ui.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+            /*border: 1px solid #003366;*/
+        }
+
+        .inline {
+            float: left;
+            width: 165px;
+            height: auto;
+            margin-left: 0px;
+            text-align: justify;
+        }
+
+        .alertify .ajs-dialog {
+            top: 50%;
+            transform: translateY(-50%);
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<form id="form1" runat="server">
+
+        <div class="warpper">
+            <div>
+
+                <table cellpadding="0" cellspacing="0" class="auto-style1">
+                    <tr>
+                        <td colspan="3" class="top">
+
+                            <div style="float: left; font-size: 12px;">
+                                <asp:Label ID="lblUserNameDisplay" runat="server" Text=""></asp:Label>
+                            </div>
+                            <div class="tdright">
+                                <asp:Menu ID="Menu3" runat="server" Orientation="Horizontal" StaticSubMenuIndent="16px">
+                                    <Items>
+                                        <asp:MenuItem Text="CheckMail" Value="CheckMail" NavigateUrl="https://192.168.100.2/" Target="_Blank"></asp:MenuItem>
+                                        <asp:MenuItem Text="|" Value="|"></asp:MenuItem>
+                                        <asp:MenuItem Text="Internet Banking" Value="Internet Banking" NavigateUrl="https://192.168.100.5/" Target="_Blank"></asp:MenuItem>
+                                        <asp:MenuItem Text="|" Value="|"></asp:MenuItem>
+                                        <asp:MenuItem Text="HR Related" Value="HR Related" NavigateUrl="~/HRPanel.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="|" Value="|"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="~/ChangePassword.aspx" Text="ChangePassword" Value="ChangePassword"></asp:MenuItem>
+                                        <asp:MenuItem Text="|" Value="|"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="~/Login.aspx" Text="LogOut" Value="LogOut"></asp:MenuItem>
+                                        <asp:MenuItem Text="|" Value="|"></asp:MenuItem>
+                                        <asp:MenuItem NavigateUrl="~/Admin.aspx" Text="Admin" Value="Admin"></asp:MenuItem>
+
+                                    </Items>
+
+                                    <StaticHoverStyle ForeColor="White" />
+
+                                    <StaticMenuItemStyle ForeColor="Yellow" />
+
+                                </asp:Menu>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr style="height: 30px">
+                        <td>
+                            <div style="padding-top: .30em; padding-left: .30em;">
+                                <asp:Image ID="Image1" ImageUrl="~/Image/logo.gif" BorderStyle="None" runat="server" Width="205px" />
+                            </div>
+                        </td>
+                        <td>
+                            <div style="float: left; font-size: x-large; font-weight: bold; color: #9c0000; height: 15px; padding: 1em;">
+                                NCC Intranet  
+                            </div>
+                            <div class="tdmarque">
+                                <marquee direction="left">
+                         <strong>
+                        <asp:Label ID="lblMar" runat="server" ></asp:Label>
+                    </strong></marquee>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="menu" colspan="3">
+                            <asp:Menu ID="Menu1" runat="server" ForeColor="White" Orientation="Horizontal" Width="100%" EnableTheming="True">
+                                <DynamicHoverStyle BackColor="#003366" />
+                                <DynamicMenuItemStyle VerticalPadding="5px" Font-Size="Small" HorizontalPadding="15px" />
+                                <DynamicMenuStyle BackColor="#D1330E" BorderColor="#E9EBEE" BorderStyle="Solid" BorderWidth="1px" />
+                                <Items>
+                                    <asp:MenuItem Text="Home" Value="Home" NavigateUrl="~/Default.aspx"></asp:MenuItem>
+                                    <%--<asp:MenuItem Text="NCC Documents" Value="NCC Documents">--%>
+                                    <asp:MenuItem Text="Policies" Value="Policies" NavigateUrl="~/Policies.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="Manuals" Value="Manuals" Target="_Blank" NavigateUrl="~/Manuals.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="Guidelines" Value="Guidelines" NavigateUrl="~/Guideline.aspx"></asp:MenuItem>
+                                    <%--<asp:MenuItem  Text="Circular" Value="Circular" NavigateUrl="~/Circular.aspx"></asp:MenuItem>--%>
+                                    <asp:MenuItem NavigateUrl="http://192.168.103.77/HRD/2007%20circular/HRD%20TOPIC.htm" Target="_Blank" Text="Circulars" Value="Circulars"></asp:MenuItem>
+                                    <asp:MenuItem Text="Product Paper" Value="Product Paper" NavigateUrl="~/LoanProductPaper.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="Acts/Regulation" Value="Acts/Regulation">
+                                        <asp:MenuItem Text="NRB Act" NavigateUrl="~/Acts/NRB Act 2058 (intetraged)-2074.02.19.pdf" Target="_Blank" Value="NRB Act"></asp:MenuItem>
+                                        <asp:MenuItem Text="Company Act" NavigateUrl="~/Acts/Company Act, 2063_Nepali.pdf" Target="_Blank" Value="Company Act"></asp:MenuItem>
+                                        <asp:MenuItem Text="Secured Transactions Act" NavigateUrl="~/Acts/Secured Transactions Act, 2063.pdf" Target="_Blank"
+                                            Value="Secured Transactions Act"></asp:MenuItem>
+                                        <asp:MenuItem Text="Money Laundering Prevention Act 2008 (2nd Amnd.)" NavigateUrl="~/Acts/Money Laundering Prevention Act 2008 (2nd Amnd.).pdf" Target="_Blank"
+                                            Value="Money Laundering Prevention Act 2008 (2nd Amnd.)"></asp:MenuItem>
+                                        <asp:MenuItem Text="Money Laundering Prevention Rule 2009 (1st Amnd. 2016)" NavigateUrl="~/Acts/Money Laundering Prevention Rule 2009 (1st Amnd. 2016).pdf" Target="_Blank"
+                                            Value="Money Laundering Prevention Rule 2009 (1st Amnd. 2016)"></asp:MenuItem>
+                                        <asp:MenuItem Text="Directive to Implement UNSCR 1267 and 1373" NavigateUrl="~/Acts/Directive to Implement UNSCR 1267 and 1373.pdf" Target="_Blank"
+                                            Value="Directive to Implement UNSCR 1267 and 1373"></asp:MenuItem>
+                                        <asp:MenuItem Text="FATF_receommendations_2012" NavigateUrl="~/Acts/FATF_receommendations_2012.pdf" Target="_Blank"
+                                            Value="FATF_receommendations_2012"></asp:MenuItem>
+                                        <asp:MenuItem Text="Suspicious_Transactions_Reporting_Guidelines_2070" NavigateUrl="~/Acts/Suspicious_Transactions_Reporting_Guidelines_2070.pdf" Target="_Blank"
+                                            Value="Suspicious_Transactions_Reporting_Guidelines_2070"></asp:MenuItem>
+                                        <asp:MenuItem Text="Threshold_Transactions_Reporting_Guidelines_2070" NavigateUrl="~/Acts/Threshold_Transactions_Reporting_Guidelines_2070.pdf" Target="_Blank"
+                                            Value="Threshold_Transactions_Reporting_Guidelines_2070"></asp:MenuItem>
+                                        <asp:MenuItem Text="BAFIA_Amendment_Integration_Act_2073" NavigateUrl="~/Acts/BAFIA_Amendment_Integration_Act_2073.pdf" Target="_Blank"
+                                            Value="BAFIA_Amendment_Integration_Act_2073"></asp:MenuItem>
+                                        <asp:MenuItem Text="Directives-Unified_Directives_2075-new" NavigateUrl="~/Acts/Directives--Unified_Directives_2075-new.pdf" Target="_Blank"
+                                            Value="Directives-Unified_Directives_2075-new"></asp:MenuItem>
+                                        <asp:MenuItem Text="NRB Act 2058 (Second Amendments)" NavigateUrl="~/Acts/NRB Act 2058 (Second Amendments).pdf" Target="_Blank"
+                                            Value="NRB Act 2058 (Second Amendments)"></asp:MenuItem>
+
+                                    </asp:MenuItem>
+
+                                    <asp:MenuItem Text="Resources" Value="Resources" NavigateUrl="~/Resources.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="BankSmart" Value="BankSmart" NavigateUrl="~/BankSmart.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="Auxiliary Service" Value="Auxiliary Service" NavigateUrl="~/AuxiliaryService.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="Remittance" Value="Remittance" NavigateUrl="~/Remittance/RemitContact.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="RF Unit" Value="Remittance" NavigateUrl="~/RFUnit.aspx"></asp:MenuItem>
+
+                                    <asp:MenuItem Text="Contact" Value="Contact" NavigateUrl="~/Branches.aspx"></asp:MenuItem>
+                                </Items>
+                                <StaticHoverStyle BackColor="#D1330E" />
+                                <StaticMenuItemStyle HorizontalPadding="15px" VerticalPadding="5px" BorderStyle="Inset" BorderWidth="1px" />
+                                <StaticMenuStyle Height="30px" />
+                            </asp:Menu>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="sides">
+                            <table class="tablequicklink" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td class="tablequicklinksheader">Quick Links:</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="tablequicklinkcontent">
+                                        <asp:Menu ID="Menu2" runat="server" CssClass="side-horizontallineonbottom">
+                                            <Items>
+                                                <%--<asp:MenuItem ImageUrl="~/Image/memo1.png" NavigateUrl="~/NCCMemo.aspx"></asp:MenuItem>--%>
+                                                <asp:MenuItem ImageUrl="~/Image/Business Pipeline.jpg" NavigateUrl="~/PipeLine.aspx"></asp:MenuItem>
+                                                <%--<asp:MenuItem Text="&gt;FTP Site" Value="&gt;FTP Site" NavigateUrl="ftp://192.168.103.3/" Target="_Blank"></asp:MenuItem>--%>
+                                                <asp:MenuItem ImageUrl="~/Image/PEP1.jpg" NavigateUrl="~/PEP.aspx"></asp:MenuItem>
+                                                <asp:MenuItem ImageUrl="~/Image/LTS1.png" NavigateUrl="~/TraceFile.aspx"></asp:MenuItem>
+                                                <asp:MenuItem ImageUrl="~/Image/NCC-KEEP.jpg" NavigateUrl="~/eTest.aspx"></asp:MenuItem>
+                                                <%--<asp:MenuItem ImageUrl="~/Image/PEP1.jpg" NavigateUrl="~/PEP.aspx"></asp:MenuItem>--%>
+                                            </Items>
+
+
+                                            <StaticHoverStyle BackColor="#E9EBEE" ForeColor="Black" Width="170px" />
+
+
+                                            <StaticMenuItemStyle Font-Bold="True" ForeColor="#003366" VerticalPadding="5px" />
+
+                                        </asp:Menu>
+                                    </td>
+                                </tr>
+
+
+                            </table>
+
+                        </td>
+
+                        <td class="contentdiv" style="width: 100%; vertical-align: top">
+
+                            <div>
+                                <asp:Panel ID="panel1" runat="server">
+                                    <%-- Height="550" ScrollBars="Auto"  >--%>
+                                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                    </asp:ContentPlaceHolder>
+                                </asp:Panel>
+                            </div>
+
+                        </td>
+                        <td class="sides">
+                            <div class="tdright">
+                                <table cellpadding="0" cellspacing="0" class="tablenews">
+                                    <tr>
+                                        <td class="tablenewsheader"><u>Today </u>
+                                            <div id="dateDiv"></div>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="tablenewsheader">
+                                            <asp:Button ID="btnIP" runat="server" Width="200px" Height="30px" BackColor="#802BB1" ForeColor="White" Font-Bold="true" Font-Size="Medium" Text="Check My IP" OnClick="btnIP_Click" />
+                                            <asp:Label ID="lblIP" runat="server" Visible="false" Font-Bold="true" Font-Size="Medium" Width="200px" Height="30px" BackColor="#802BB1" ForeColor="White" Text=""></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tablequicklinkcontent">
+                                            <asp:Menu ID="Menu4" runat="server" CssClass="side-horizontallineonbottom">
+                                                <Items>
+                                                    <asp:MenuItem ImageUrl="~/Image/riskreporting.png" NavigateUrl="~/OpRiskEvent.aspx"></asp:MenuItem>
+                                                    <asp:MenuItem ImageUrl="~/Image/Indicator.png" NavigateUrl="~/RiskAssess.aspx"></asp:MenuItem>
+                                                </Items>
+                                                <StaticHoverStyle BackColor="#E9EBEE" ForeColor="Black" Width="170px" />
+                                                <StaticMenuItemStyle Font-Bold="True" ForeColor="#003366" VerticalPadding="2px" />
+                                            </asp:Menu>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div id="question" runat="server" style="width: 200px; height: 245px;">
+
+                                                <div style="height: 220px; width: 190px">
+                                                    <div class="inline" style="border: thick groove #569cd6; border-top-left-radius: 1em; background-color:#3500D3; border-top-right-radius: 1em; width: 190px; color: white; font-weight: bold;">
+                                                        &nbsp;&nbsp;
+                                                
+                                                <asp:Literal ID="ltlQues" runat="server"></asp:Literal>
+
+                                                    </div>
+                                                    <div class="inline" style="border: thick groove #569cd6; border-top: 0; background-color: lightgray; width: 190px; height: auto;">
+                                                        <asp:RadioButtonList ID="RadioButtonList1" ForeColor="#9e0001" runat="server" Height="20px" Font-Size="Small"
+                                                            Width="190px" RepeatLayout="Flow">
+                                                        </asp:RadioButtonList>
+                                                    </div>
+                                                    <div style="border: thick groove #569cd6; border-top: 0; background-color: lightgray; width: 190px; float: left; height: 31px;">
+
+                                                        <asp:Button ID="btnSubmit" runat="server" CssClass="btn" Text="Submit"
+                                                            OnClick="btnSubmit_Click1" />
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <asp:LinkButton ID="btnResult" runat="server" ForeColor="Blue" CssClass="ui-icon-link" Font-Bold="true" Font-Size="Medium" OnClick="btnResult_Click1">Result</asp:LinkButton>
+                                                    </div>
+                                                    <div style="border: thick groove #569cd6; border-top: 0; background-color:#3500D3; color: white; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; width: 190px; float: left; height: 20px; font-weight: bold;">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+                                    <asp:Literal ID="ltlanscount" runat="server"></asp:Literal>
+                                                        
+                                                    </div>
+                                                    <asp:HiddenField ID="quesid" runat="server" />
+                                                </div>
+                                            </div>
+                                            <div id="result" runat="server" visible="false" class="inline" style="border: thick groove #569cd6; border-top-left-radius: 1em; border-top-right-radius: 1em; width: 190px; color: white; font-weight: bold;">
+                                                <asp:Literal ID="Literal1" runat="server"></asp:Literal>
+                                                
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="footer" colspan="3">
+
+                            <div class="container">
+                                <div class="ft_lt">
+                                    Copyright <span style="font-family: arial;">©</span> 2017-<%=DateTime.Now.Year %> , IT Department, Nepal Credit &amp; Commerce Bank Ltd. All Rights Reserved.
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </form>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $('#Menu1 a.static').each(function () {
+                $(this).css({
+                    'padding-right': '12px',
+                    'padding-left': '12px',
+                    'padding-top': '5px',
+                    'padding-bottom': '5px'
+                });
+            });
+        });
+        
+    </script>
+</body>
+</html>
