@@ -27,6 +27,7 @@
         }
 
         ul[type="none"] li{
+            color:blue;
             padding-bottom:6px;
         }
         
@@ -75,13 +76,46 @@
             </a>
         </li>
 
-        <li>
-            <img src="" />
+        <li type="none">
+            <div style="display:flex; flex-direction:row; justify-content:space-around; align-items:center;">
+                <a href="RF/RF PAN.jpg" target="_blank" style="max-width:15vw; text-align:center; color:blue;">
+                    <img src="RF/RF PAN.jpg" alt="RF PAN" title="RF PAN" style="max-width:15vw;"/>
+                    <small>RF PAN</small>
+
+                </a>
+
+                <a href="RF/NRB-RF Authority Letter.JPG" target="_blank" style="max-width:15vw; text-align:center;color:blue;">
+                    <img src="RF/NRB-RF Authority Letter.JPG" alt="NRB Authority Letter" title="NRB Authority Letter" style="max-width:15vw;"/>
+                    <small>NRB Authority Letter</small>
+                </a>
+
+                <a href="RF/IRD-RF Authority Letter.JPG" target="_blank" style="max-width:15vw; text-align:center;color:blue;">
+                    <img src="RF/IRD-RF Authority Letter.JPG" alt="IRD-RF Authority Letter" title="IRD-RF Authority Letter" style="max-width:15vw;"/>
+                    <small>IRD-RF Authority Letter</small>
+
+                </a>
+
+            </div>
+
+            
         </li>
 
+        <%--<li>
+            <a href="RF/NRB-RF Authority Letter.JPG" target="_blank">
+                Letter of NRB
+            </a>
+        </li>
+
+        <li>
+            <a href="RF/IRD-RF Authority Letter.JPG" target="_blank">
+                Letter of IRD
+            </a>
+        </li>--%>
+
      </ul>
+    <hr />
     <ul type="none">
-        <h3>Contact</h3>
+        <h3><u>Contact</u></h3>
         <li>NCCB Retirement Fund Unit</li>
         <li>NCC Bank Ltd., Head Office, Bagbazar, KTM.</li>
         <li>Tel : 977-01-4246991, Ext. 125 & 411, Fax: 977-01-4262843</li>
