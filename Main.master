@@ -83,7 +83,7 @@
                                     <Items>
                                         <asp:MenuItem Text="CheckMail" Value="CheckMail" NavigateUrl="https://192.168.100.2/" Target="_Blank"></asp:MenuItem>
                                         <asp:MenuItem Text="|" Value="|"></asp:MenuItem>
-                                        <asp:MenuItem Text="Internet Banking" Value="Internet Banking" NavigateUrl="https://192.168.100.5/" Target="_Blank"></asp:MenuItem>
+                                        <asp:MenuItem Text="Internet Banking" Value="Internet Banking" NavigateUrl="https://10.11.15.2/" Target="_Blank"></asp:MenuItem>
                                         <asp:MenuItem Text="|" Value="|"></asp:MenuItem>
                                         <asp:MenuItem Text="HR Related" Value="HR Related" NavigateUrl="~/HRPanel.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="|" Value="|"></asp:MenuItem>
