@@ -35,7 +35,7 @@ public partial class OpRiskApp : System.Web.UI.Page
 
         {
 
-            if (Lbranch > 990 || userid == "mukunda" || userid == "mohan" || userid == "saroj.bhandari" || userid == "rajeshd" || userid == "kumari9" || userid == "jenish1416")
+            if (Lbranch > 990 || userid == "mukunda" || userid == "mohan" || userid == "saroj.bhandari" || userid == "rajeshd" || userid == "kumari9" || userid == "jenish1416" || userid == "sonam1468")
             {
                 btnRPT.Visible = true;
                 h3.Visible = false;
@@ -128,7 +128,7 @@ public partial class OpRiskApp : System.Web.UI.Page
         string userid1 = Session["UserId"].ToString();
         DataTable dt = dra.GetFileByOpId(OpId);
         string status = dt.Rows[0]["Status"].ToString();
-        if (status == "Approved" || status1 != "IsBM" && userid1 != "mukunda" && userid1 != "mohan" && userid1 != "saroj.bhandari") 
+        if (status == "Approved" || status1 != "IsBM" && userid1 != "mukunda" && userid1 != "mohan" && userid1 != "saroj.bhandari" && userid1 != "sonam1468") 
         
         {
             btnApprove.Visible = false;
