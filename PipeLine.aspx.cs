@@ -14,14 +14,15 @@ public partial class PipeLine : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         string branch = Session["BranchCode"].ToString();
-        if(branch !="000")
-        {
-            Head.Visible = false;
-        }
-        else
+        int Lbranch = Int32.Parse(branch); 
+        if(branch == "000" || Lbranch > 990 )
         {
             ddlType.Items.Remove("Deposit");
             ddlType.Items.Remove("Loan");
+        }
+        else
+        {
+            Head.Visible = false;
         }
         if(!IsPostBack)
         {
@@ -61,10 +62,15 @@ public partial class PipeLine : System.Web.UI.Page
             GetReportALL();
             Branch.Visible = false;
         }
-        else
+        else if (ddlRpt.SelectedValue == "Branch Wise")
         {
             //txtBranch.Visible = true;
             GetReportByBranch();
+            Branch.Visible = false;
+        }
+        else
+        {
+            GetReportByProvince();
             Branch.Visible = false;
         }
         
@@ -89,6 +95,16 @@ public partial class PipeLine : System.Web.UI.Page
         gvReportALL.DataSource = dt;
         gvReportALL.DataBind();
         
+    }
+
+    private void GetReportByProvince()
+    {
+
+        string province = txtBranch.Text;
+        DataTable dt = dpl.GetReportByProvince(province);
+        gvReportALL.DataSource = dt;
+        gvReportALL.DataBind();
+
     }
 
     protected void btnExportToExcel_Click(object sender, EventArgs e)

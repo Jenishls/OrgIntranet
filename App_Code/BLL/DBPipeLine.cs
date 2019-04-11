@@ -200,6 +200,23 @@ public class DBPipeLine
                                 return dt;
     }
 
+    public DataTable GetReportByProvince(string province)
+    {
+        SqlParameter[] param = new SqlParameter[]
+        {
+            
+             new SqlParameter("@b",province)
+        };
+        DataTable dt = DAO.GetTable(param, @"
+                        SELECT Province,BranchName,ReferenceNo,CONVERT(VARCHAR(Max),Name) AS Name,BusinessType,
+                        REPLACE(convert(varchar,convert(Money, ISNULL(P.ExpectedAmt,0)+ISNULL(P.ExpectedAmt1,0)+ISNULL(P.ExpectedAmt2,0)),1),'.00','') AS ExpectedAmt,Probability,
+                        CONVERT(NVARCHAR(max),CreatedOn,101) AS CreatedOn,Status FROM dbo.PipeLineLoan P, dbo.BranchTable B
+                        WHERE P.BranchCode=B.BranchCode
+                        AND B.Province=@b
+                        ORDER BY CreatedOn DESC", CommandType.Text);
+        return dt;
+    }
+
     public int Canceled(string refno)
     {
         SqlParameter[] param = new SqlParameter[]

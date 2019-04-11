@@ -44,6 +44,7 @@
                     <asp:DropDownList ID="ddlRpt" runat="server" Height="2.5em" CssClass="dropboxcss" OnSelectedIndexChanged="ddlRpt_SelectedIndexChanged" AutoPostBack="true" ForeColor="Blue" Width="11em">
                         <asp:ListItem>ALL</asp:ListItem>
                         <asp:ListItem>Branch Wise</asp:ListItem>
+                        <asp:ListItem>Province Wise</asp:ListItem>
                     </asp:DropDownList>
                     </div>
                     <%--<div style="padding-bottom:.5em;float:left; padding-right:.3em">
