@@ -12,10 +12,10 @@
    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-  <span id="Review" class="protected">
-    <p class="contenthead">Interest Rate </p>
-    <center>
-    <table>
+  <%--<span id="Review" class="protected">
+    <p class="contenthead">Interest Rate </p>--%>
+    
+    <%--<table>
         <tr>
             <td style="color:blue; margin-left:300px">
                 Interest Rate On Deposit
@@ -36,10 +36,12 @@
                 </a>         
             </td>
         </tr>
-    </table>
-        </center>
+    </table>--%>
+        <div style="display:flex; justify-content:center">
+            <img src="InterestRate\depositrate2.png" />
+        </div>
     
-    </span>
+    <%--</span>--%>
      
   
 </asp:Content>
