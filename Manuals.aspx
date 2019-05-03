@@ -127,7 +127,7 @@
         </li>
         
         <li>
-            <a href="Manuals/Circular%2010.pdf" target="_blank">
+            <a href="Manuals/Credit Administration Manual.pdf" target="_blank">
                 Credit Administration Manual 2018
             </a>
         </li> 
