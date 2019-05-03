@@ -14,7 +14,11 @@
             font-weight: 700;
         }
         .certificate{
-            z-index:555;position:absolute;top:531px;right:420px;
+            z-index:555;
+            position:absolute;
+            top:531px;
+            right:420px;
+            width:500px;
         }
     </style>
  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -39,22 +43,22 @@
     <div id="Cert1" runat="server" style=" margin-left:50px; height:600px; width:800px;  border-radius: 15px; background-repeat:no-repeat;">
         <img src="../Image/Certificate.jpg" style="z-index:1;"/>
         <div class="certificate">
-        <div style="margin-left:250px; height:20px; font-size:x-large; z-index:999;font-style:italic; font-family:vardana; font-weight:bold;">
+        <div style="margin-left:140px; height:20px; font-size:x-large; z-index:10;font-style:italic; font-family:vardana; font-weight:bold;">
     <asp:Label ID="lblName" runat="server"></asp:Label>
    </div>
         <br />
         <%--<br />--%>
             <div class="info">
-        <div style="margin-left:490px; height:15px;">
+        <div style="margin-left:350px; height:15px;margin-top:5px;position:absolute;">
     <asp:Label ID="lblSubject" runat="server"></asp:Label>
      </div>
         <br />
-        <div style="margin-left:340px; height:25px;">
+        <div style="margin-left:250px; height:25px;margin-top:15px">
         <asp:Label ID="lblGrade" runat="server"></asp:Label>
      </div>
         <br />
         <br />
-        <div style="margin-left:450px;">
+        <div style="margin-left:375px;position:absolute;padding-top:5px;">
     <asp:Label ID="lblDate" runat="server"></asp:Label>
      </div>
             </div>

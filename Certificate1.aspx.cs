@@ -8,6 +8,7 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Globalization; 
 
 using System.IO;
 using System.Drawing.Imaging;
@@ -18,14 +19,21 @@ public partial class Certificate1 : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         string userid = Session["UserId"].ToString();
-        //string username = Session["FullName"].ToString();
-        DataTable dt = dut.GetCertificate(userid);
         
+        DataTable dt = dut.GetCertificate(userid);
+
+        if (Session["examId"] != null){
+            int examId = Int32.Parse( Session["examId"].ToString() );      
+             dt = dut.GetCertificateByDate(userid, examId );
+        } 
+        
+             
+      
         lblName.Text = dt.Rows[0]["FullName"].ToString();
         //lblBranch.Text = dt.Rows[0]["BranchName"].ToString();
         lblGrade.Text = dt.Rows[0]["Grade"].ToString();
         lblSubject.Text = dt.Rows[0]["sname"].ToString();
-        lblDate.Text =Convert.ToDateTime( dt.Rows[0]["EDate"]).ToString("MM/dd/yyyy");
+        lblDate.Text = Convert.ToDateTime( dt.Rows[0]["EDate"]).ToString("MM/dd/yyyy");
             
     }
     //protected void btnExporttoimage_Click(object sender, EventArgs e)
