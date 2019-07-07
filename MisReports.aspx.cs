@@ -43,13 +43,12 @@ public partial class MisReports : System.Web.UI.Page
                             'ApprovedBy'=(select UserId from UserTable where [Approved/RejectedBy]=Email),
                             [Approved/RejectedOn],
                             'LastForwardedBy'=(select UserId from UserTable where R.LastForwardedBy=Email),
-                            CreatedOn,Nature 
+                            CreatedOn,LastForwardedOn ,Nature 
                             FROM TraceFile R(NOLOCK),UserTable U(NOLOCK)
-
                             WHERE R.CreatedBy=U.Email
                             and R.Status in('A','R') 
                             AND R.BranchCode=CASE WHEN @BranchCode='ALL' THEN R.BranchCode ELSE @BranchCode END
-                            AND [Approved/RejectedOn] Between @SDate AND @EDate 
+                            AND [CreatedOn] Between @SDate AND @EDate 
                             Order By 2,1";
                             
 

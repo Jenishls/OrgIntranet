@@ -28,7 +28,7 @@ public partial class TraceFile : System.Web.UI.Page
 
         {
 
-            if (userid == "tripti" || userid == "ashim" || userid == "sameer" || userid == "mukunda" || userid == "mohan" || userid == "uresh" || userid=="binod")
+            if (userid == "tripti" || userid == "ashim" || userid == "sameer" || userid == "mukunda" || userid == "jenish1416" || userid == "uresh" || userid == "binod" || userid == "mohan")
             {
                 btnReport.Visible = true;
             }

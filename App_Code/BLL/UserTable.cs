@@ -154,8 +154,16 @@ public class UserTable
 
     public DataTable GetDesignation()
     {
-
         return DAO.GetTable(null, "SELECT * FROM dbo.Designation", CommandType.Text);
+    }
+
+    public DataTable GetDesignationByLevel(string level)
+    {
+        SqlParameter[] param = new SqlParameter[]
+        {
+            new SqlParameter("@level",level)
+        };
+        return DAO.GetTable(param, "SELECT * FROM dbo.Designation where StaffLevel =@level", CommandType.Text);
     }
 
     public int UpdateExam(string userid, int status)

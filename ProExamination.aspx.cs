@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Globalization;
 using System.Data;
+using System.Threading;
+using System.Threading.Tasks;
 
 public partial class ProExamination : System.Web.UI.Page
 {
@@ -44,6 +46,8 @@ public partial class ProExamination : System.Web.UI.Page
         ans2.InnerHtml = q.ans2;
         ans3.InnerHtml = q.ans3;
         ans4.InnerHtml = q.ans4;
+
+        answer.InnerHtml = q.qid.ToString();
 
         // reset all radio buttons
         //if(IsPostBack)
@@ -123,7 +127,11 @@ public partial class ProExamination : System.Web.UI.Page
     
     protected void btnNext_Click(object sender, EventArgs e)
     {
-        
+        if (rbAns1.Checked == true || rbAns2.Checked == true || rbAns3.Checked == true || rbAns4.Checked == true) {
+            answer.Visible = true;            
+        }
+        Task.Delay(5000);
+
             btnCancel.Visible = false;
             ProcessQuestion();
             Examination exam = (Examination)Session["questions"];

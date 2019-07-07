@@ -169,7 +169,9 @@
     </tr>
     <asp:CheckBox runat="server" ID="remaining" Visible="false"/>
     </table>
-        
+
+    <label for="ContentPlaceHolder1_Answer" runat="server" id="answer" style="font-size:large; padding: 20px 0"></label>
+       
             </div>
         <div class="buttonSection">
         <asp:Button ID="btnPrev" CssClass="btnMain btnGreen" runat="server" Text="Previous" OnClick="btnPrev_Click" />&nbsp;
