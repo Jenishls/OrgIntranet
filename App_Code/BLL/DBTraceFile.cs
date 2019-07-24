@@ -67,7 +67,8 @@ public class DBTraceFile
                         WHERE R.CreatedBy=U.Email
                         and R.Status not in('A','R')
                         and (select UserId from UserTable where R.LastForwardedTo=Email)=@i
-                        order by CreatedOn ASC", CommandType.Text);
+                       AND [CreatedOn] > '2019-1-1'
+                        order by CreatedOn DESC", CommandType.Text);
                                 return dt;
     }
     public DataTable GetAllPendingTraceFileBranchWise(string branch)
@@ -109,9 +110,10 @@ public class DBTraceFile
                         'CreatedBy'=U.FullName,
                         CreatedOn,NLimit,LimitType,Nature 
                         FROM TraceFile R(NOLOCK),UserTable U(NOLOCK)
-
+                        
                         WHERE  R.CreatedBy=U.Email
-                        and R.Status in('A','R') order by CreatedOn ASC", CommandType.Text);
+                        AND [CreatedOn] > '2019-1-1'
+                        and R.Status in('A','R') order by CreatedOn DESC", CommandType.Text);
                                 return dt;
     }
     public DataTable GetAllApprovedTraceFileBranchWise(string branch)

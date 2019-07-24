@@ -81,6 +81,8 @@
                             <div class="tdright">
                                 <asp:Menu ID="Menu3" runat="server" Orientation="Horizontal" StaticSubMenuIndent="16px">
                                     <Items>
+                                        <asp:MenuItem Text="New " Value="CheckMail" NavigateUrl="Circular.aspx" Target="_Blank"></asp:MenuItem>
+                                        <asp:MenuItem Text="|" Value="|"></asp:MenuItem>
                                         <asp:MenuItem Text="CheckMail" Value="CheckMail" NavigateUrl="https://192.168.100.2/" Target="_Blank"></asp:MenuItem>
                                         <asp:MenuItem Text="|" Value="|"></asp:MenuItem>
                                         <asp:MenuItem Text="Internet Banking" Value="Internet Banking" NavigateUrl="https://10.11.15.2/" Target="_Blank"></asp:MenuItem>
@@ -138,7 +140,7 @@
                                     <asp:MenuItem Text="Manuals" Value="Manuals" Target="_Blank" NavigateUrl="~/Manuals.aspx"></asp:MenuItem>
                                     <asp:MenuItem Text="Guidelines" Value="Guidelines" NavigateUrl="~/Guideline.aspx"></asp:MenuItem>
                                     <%--<asp:MenuItem  Text="Circular" Value="Circular" NavigateUrl="~/Circular.aspx"></asp:MenuItem>--%>
-                                    <asp:MenuItem NavigateUrl="http://192.168.103.77/HRD/2007%20circular/HRD%20TOPIC.htm" Target="_Blank" Text="Circulars" Value="Circulars"></asp:MenuItem>
+                                    <asp:MenuItem NavigateUrl="CircularMain.aspx"  Text="Circulars" Value="Circulars"></asp:MenuItem>
                                     <asp:MenuItem Text="Product Paper" Value="Product Paper" NavigateUrl="~/LoanProductPaper.aspx"></asp:MenuItem>
                                     <asp:MenuItem Text="Acts/Regulation" Value="Acts/Regulation">
                                         <asp:MenuItem Text="NRB Act" NavigateUrl="~/Acts/NRB Act 2058 (intetraged)-2074.02.19.pdf" Target="_Blank" Value="NRB Act"></asp:MenuItem>
@@ -200,6 +202,7 @@
                                                 <asp:MenuItem ImageUrl="~/Image/PEP1.jpg" NavigateUrl="~/PEP.aspx"></asp:MenuItem>
                                                 <asp:MenuItem ImageUrl="~/Image/LTS1.png" NavigateUrl="~/TraceFile.aspx"></asp:MenuItem>
                                                 <asp:MenuItem ImageUrl="~/Image/NCC-KEEP.jpg" NavigateUrl="~/eTest.aspx"></asp:MenuItem>
+                                                <asp:MenuItem ImageUrl="~/Image/aodd.jpg" NavigateUrl="http://192.168.103.155/" target="_blank"></asp:MenuItem>
                                                 <%--<asp:MenuItem ImageUrl="~/Image/PEP1.jpg" NavigateUrl="~/PEP.aspx"></asp:MenuItem>--%>
                                             </Items>
 

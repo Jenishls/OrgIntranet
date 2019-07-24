@@ -32,7 +32,7 @@
      <strong>End Date</strong>
      <asp:TextBox ID="TextBox3" TextMode="Date" CssClass="textboxcss" runat="server" Width="25%"></asp:TextBox>
      <br />
-<asp:Button ID="GetFile" CssClass="btn1" runat="server" Text="Approved List" OnClick="GetFile_Click" />
+<asp:Button ID="GetFile" CssClass="btn1" runat="server" Text="Created List" OnClick="GetFile_Click" />
     <asp:Button ID="GetPending" CssClass="btn1" runat="server" Text="Pending List" OnClick="GetPending_Click" />
     <asp:Button ID="btnExportToExcel" CssClass="btn" runat="server" Text="Export to excel" OnClick="btnExportToExcel_Click" />
     <asp:Button ID="btnBack" CssClass="btn" runat="server" Text="Back To Page" OnClick="btnBack_Click" />

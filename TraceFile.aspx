@@ -149,7 +149,7 @@
         </table></div></center>
         </asp:View>
         </asp:MultiView>
-    <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="3" CssTheme="XP">
+    <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" CssTheme="XP">
         <cc1:TabPanel runat="server" HeaderText="Loan Apply" ID="TabPanel1">
             <HeaderTemplate>
                 <panel><p style="color:black;font-weight:bold">Loan Apply </p></panel>

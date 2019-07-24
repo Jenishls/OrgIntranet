@@ -46,12 +46,12 @@ public partial class MisReports : System.Web.UI.Page
                             CreatedOn,LastForwardedOn ,Nature 
                             FROM TraceFile R(NOLOCK),UserTable U(NOLOCK)
                             WHERE R.CreatedBy=U.Email
-                            and R.Status in('A','R') 
+                            
                             AND R.BranchCode=CASE WHEN @BranchCode='ALL' THEN R.BranchCode ELSE @BranchCode END
                             AND [CreatedOn] Between @SDate AND @EDate 
                             Order By 2,1";
                             
-
+            //and R.Status in('A','R') 
             //and (select UserId from UserTable where R.LastForwardedTo=Email)=@Name
             //string Command = "Select BranchCode,ReferenceNo,LoanName,Limit,LastForwardedBy,LastForwardedTo,CreatedOn from TraceFile where LastForwardedTo =@Name order by 1,2";
             SqlCommand cmd = new SqlCommand(Command, con);
@@ -94,11 +94,12 @@ public partial class MisReports : System.Web.UI.Page
                             FROM TraceFile R(NOLOCK),UserTable U(NOLOCK)
 
                             WHERE R.CreatedBy=U.Email
-                            and R.Status NOT IN ('A','R') 
+                            
                             AND R.BranchCode=CASE WHEN @BranchCode='ALL' THEN R.BranchCode ELSE @BranchCode END
                             AND LastForwardedOn Between @SDate AND @EDate 
                             Order By 2,1";
 
+           // and R.Status NOT IN ('A','R') 
 
             //and (select UserId from UserTable where R.LastForwardedTo=Email)=@Name
             //string Command = "Select BranchCode,ReferenceNo,LoanName,Limit,LastForwardedBy,LastForwardedTo,CreatedOn from TraceFile where LastForwardedTo =@Name order by 1,2";
