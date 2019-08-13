@@ -82,6 +82,15 @@
             <asp:CheckBox ID="CheckBox1" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" />
         </td>
       </tr>
+       <tr>
+        <td class="risklefttd">
+            <div style="float: left">Send Mail</div>
+            <div style="float: right">:</div>
+        </td>
+        <td class="riskrighttd">
+            <asp:CheckBox ID="CheckBox2" runat="server" OnCheckedChanged="CheckBox2_CheckedChanged" />
+        </td>
+      </tr>
   </table>
 <asp:Button ID="CircularSave" runat="server" Text="Upload"
     OnClick="CircularSave_Click" CssClass="btnMain btnGreen" />

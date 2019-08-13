@@ -10,6 +10,7 @@ public partial class CircualarMain : System.Web.UI.Page
 
     BLLCircular bll = new BLLCircular();
     private int checkForReview = 0;
+    private int checkSendMail = 0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -44,20 +45,10 @@ public partial class CircualarMain : System.Web.UI.Page
                 typo = "Administration Circular";
             else
                 typo = "Office Instruction Memo";
-            
-            String body = "Dear All," +
-                            Environment.NewLine + "Please find the " + typo +" No.: "+ lbCircularNo.Text +" regarding "+ lbSubject.Text + " for your necessary information and implementation in http://10.10.5.2/Circular.aspx " +
-                            Environment.NewLine + "" +
-                            Environment.NewLine + "" +
 
-                            Environment.NewLine + "With Regards," +
-                            Environment.NewLine + "Human Resource Department" +
-                            Environment.NewLine + "Head Office" +
-                            Environment.NewLine + "Contact: 01-4246991" +
-                            Environment.NewLine + "Fax: 01-4244936";
-
-
-            String status = bll.SendMail(lbSubject.Text, body);
+            if (checkSendMail == 1) {
+                sendMail(typo);
+            }
 
             ClientScript.RegisterStartupScript(this.GetType(), "popup", "<script type='text/javascript'>alert(' Circular has been uploaded and email has been sent to everyone@nccbank.com.np ');</script>");
             //lbOne.Text = a.ToString();
@@ -89,6 +80,34 @@ public partial class CircualarMain : System.Web.UI.Page
         {
             checkForReview = 0;
         }
-        
+    }
+
+    protected void CheckBox2_CheckedChanged(object sender, EventArgs e)
+    {
+        if (checkForReview == 0)
+        {
+            checkForReview = 1;
+        }
+        else
+        {
+            checkForReview = 0;
+        }
+    }
+
+    public void sendMail(string typo) 
+    {
+        String body = "Dear All," +
+                            Environment.NewLine + "Please find the " + typo + " No.: " + lbCircularNo.Text + " regarding '" + lbSubject.Text + "' for your necessary information and implementation in http://10.10.5.2/Circular.aspx " +
+                            Environment.NewLine + "" +
+                            Environment.NewLine + "" +
+
+                            Environment.NewLine + "With Regards," +
+                            Environment.NewLine + "Human Resource Department" +
+                            Environment.NewLine + "Head Office" +
+                            Environment.NewLine + "Contact: 01-4246991" +
+                            Environment.NewLine + "Fax: 01-4244936";
+
+
+        String status = bll.SendMail(lbSubject.Text, body);
     }
 }
