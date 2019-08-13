@@ -6,7 +6,8 @@
    <asp:Button ID="btnRPT" runat="server" Visible="false" CssClass="btn" OnClick="btnRPT_Click" style="margin-left: 0%;" Text="Get Report"></asp:Button>
     <br />
     <asp:Panel runat="server" ID="h3">
-        <h3 style="color:green"> Approve/Delete</h3>
+        <h3 style="color:green"> Approve/Delete<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+        </h3>
     </asp:Panel>
     <asp:Image ID="Image1" ImageUrl="~/Image/riskexposure.png" runat="server" />
     <br />

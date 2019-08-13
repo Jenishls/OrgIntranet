@@ -55,6 +55,8 @@ public partial class Login : System.Web.UI.Page
                 Session["Status"] = dt.Rows[0]["Status"];
                 Session["Designation"] = dt.Rows[0]["Designation"];
                 Session["Level"] = dt.Rows[0]["Level"];
+                Session["Department"] = dt.Rows[0]["Department"];
+
 
                 int i = ut.GetIp(userid, IP);
                 if (txtPassword.Text != "abc123" && txtPassword.Text !="ABC123")

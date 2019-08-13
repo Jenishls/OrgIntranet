@@ -21,6 +21,13 @@ public partial class Main : System.Web.UI.MasterPage
     Db ff = new Db();
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["UserType"] != null)
+        {
+            Response.Redirect("Login.aspx");
+            //cast it and use it
+            //business logic
+        }
+       
         lblMar.Text = "Welcome To NCC Bank Intranet";
         if (!IsPostBack)
         {

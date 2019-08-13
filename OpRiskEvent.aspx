@@ -56,7 +56,7 @@
     </div>
    
     
-    <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" CssTheme="XP" CssClass="ui-tabs-nav" padding="10px">
+    <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="3" CssTheme="XP" CssClass="ui-tabs-nav" padding="10px">
         <cc1:TabPanel runat="server" HeaderText="Create Event" ID="TabPanel1">
             <HeaderTemplate>
                 <panel><p style="color:black;font-weight:bold">Create Event </p></panel>
@@ -636,14 +636,18 @@
                     ForeColor="Red" ValidationGroup="b">*</asp:RequiredFieldValidator>
         </td></tr><tr><td><center><div style="float: left;margin-left:30px"><asp:Button ID="btnBackAF" runat="server" CssClass="btn" 
             OnClick="btnBack_Click" style="margin-left: 10px" Text="Back"></asp:Button>
+            <asp:Button ID="Button1" runat="server" CssClass="btn" 
+             style="margin-left: 10px" Text="Delete"></asp:Button>
         </div>
             <div style="float: right"><asp:Button ID="btnForward" runat="server" CssClass="btn" 
             OnClick="btnForward_Click" style="float: left; margin-left: 10px" Text="Forward" ValidationGroup="b"></asp:Button>
         <asp:ValidationSummary ID="ValidationSummary2" runat="server" ForeColor="Red" HeaderText="Errors : " ShowMessageBox="True" ShowSummary="False" ValidationGroup="b"></asp:ValidationSummary>
-        </div></center></td><td><div style="float: left">
-            <asp:Button ID="btnApprove" runat="server" Visible="false" CssClass="btn" OnClick="btnApprove_Click" style="margin-left: 10px" Text="Approve"></asp:Button>
-            <asp:Button ID="btnPrint1"   cssclass="btn" runat="server" Text="Print" style="margin-left: 200px"  OnClientClick="return printpage1();"/>
-        </div>
+        </div></center></td>
+            <td>
+            <div style="float: left">
+                <asp:Button ID="btnApprove" runat="server" Visible="False" CssClass="btn" OnClick="btnApprove_Click" style="margin-left: 10px" Text="Approve"></asp:Button>
+                <asp:Button ID="btnPrint1"   cssclass="btn" runat="server" Text="Print" style="margin-left: 200px"  OnClientClick="return printpage1();"/>
+            </div>
             <div style="float: left">
              
         </div></td></tr></table></div></center></asp:View>

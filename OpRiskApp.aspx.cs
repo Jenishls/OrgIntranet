@@ -25,6 +25,8 @@ public partial class OpRiskApp : System.Web.UI.Page
         string usertype = Session["Status"].ToString();
         string userid = Session["UserId"].ToString();
         string LoginBranch = Session["BranchCode"].ToString();
+        string dept = Session["Department"].ToString();
+
         int Lbranch = Int32.Parse(LoginBranch); 
         if (usertype == "CRO" || usertype == "DCEO" || usertype == "CEO" || userid == "binod")
             
@@ -34,8 +36,7 @@ public partial class OpRiskApp : System.Web.UI.Page
         }
 
         {
-
-            if (Lbranch > 990 || userid == "mukunda" || userid == "mohan" || userid == "saroj.bhandari" || userid == "rajeshd" || userid == "kumari9" || userid == "jenish1416" || userid == "sonam1468")
+            if (Lbranch > 990 || userid == "sabin1091" || userid == "mohan" || userid == "saroj.bhandari" || userid == "rajeshd" || userid == "kumari9"  || dept == "BOD" || dept.Equals("Admin") || dept == "System" || userid == "sonam1468")
             {
                 btnRPT.Visible = true;
                 h3.Visible = false;
