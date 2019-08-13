@@ -56,7 +56,8 @@
     </style>
     <asp:Label id="lbOne" runat="server"></asp:Label>
     <div style="font-family:Arial">
-        <h3 class="auto-style2">Circulars</h3>
+        <h3><asp:Label ID="lbtest" runat="server"></asp:Label></h3>
+        <%--<h3 class="auto-style2" id="headingC" runat="server">Circulars</h3>--%>
         <%--<table class="tablecss">
             <tr>
         <td class="risklefttd">
@@ -160,17 +161,23 @@
     <SortedDescendingHeaderStyle BackColor="#7E0000" />
 </asp:GridView>--%>
 
-<asp:GridView ID="CircularGridView" runat="server" AutoGenerateColumns="False" 
-    BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" CellPadding="10" AllowSorting="True" >
+<asp:GridView ID="CircularGridView" runat="server" AutoGenerateColumns="False" OnRowDataBound="GridView1_RowDataBound"  OnRowDeleting="GridView1_RowDeleting"
+    BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" CellPadding="10" AllowSorting="True" DataKeyNames="Id" OnDataBinding="GridView1_DataBinding">
             <Columns>
-                <asp:BoundField DataField="CirNo" HeaderText="Circular No" SortExpression="CirNo" />
+                <asp:BoundField DataField="CirNo" HeaderText="No" SortExpression="CirNo" />
                 <asp:TemplateField HeaderText="Subject">
                         <ItemTemplate>
                             <a href="CircularDisplay.aspx?link=<%#Eval("filename") %>"> <%#Eval("Subject") %> </a>
+                            <%--<asp:LinkButton ID="circularLink" runat="server" CausesValidation="False" Text="<%#Eval("Subject") %>"></asp:LinkButton>--%>
                         </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="Created_at" HeaderText="Date" SortExpression="Created_at" />
                 <%--<asp:BoundField DataField="Date" HeaderText="Date" SortExpression="Date" />--%>
+                <asp:TemplateField ShowHeader="False">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete"></asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
     <FooterStyle BackColor="#FFFFCC" ForeColor="#330099" />
     <HeaderStyle BackColor="#990000" Font-Bold="True" 
@@ -187,5 +194,16 @@
         </asp:GridView>
 
 </div>
+
+    <script>
+        jQuery(document).ready(function ($) {
+            $("#ContentPlaceHolder1_CircularGridView a").on('click', function (e) {
+                e.preventDefault();
+                console.log($(this).attr('href'))
+                localStorage.setItem('CirNo', $(this).parent().parent().children().first().text())
+                location.href = $(this).attr('href')
+            })
+        });
+    </script>
 </asp:Content>
 

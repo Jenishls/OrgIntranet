@@ -3,27 +3,18 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <%--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">--%>
+    <div id="createCircular" runat="server">
     <h3 class="auto-style2">Add Circular</h3>
-  <table class="tablecss">
-    <tr>
-        <td class="risklefttd">
-            <div style="float: left">Year</div>
-            <div style="float: right">:</div>
-        </td>
-        <td class="riskrighttd">
-            <asp:Textbox id="lbYear" runat="server" cssclass="textboxcss" text=""></asp:Textbox>
-        </td>
-        <td class="riskrighttd">
-            <%--<asp:requiredfieldvalidator id="requiredfieldvalidator1" runat="server" controltovalidate="lbYear" errormessage="Enter year" forecolor="red" initialvalue="choose branch" validationgroup="a">*</asp:requiredfieldvalidator>--%>
-        </td>
-    </tr>
+  <table class="tablecss" >
+
     <tr>
         <td class="risklefttd">
             <div style="float: left">Circular Type</div>
             <div style="float: right">:</div>
         </td>
         <td class="riskrighttd">
-            <asp:dropdownlist id="drpCircularType" runat="server" cssclass="dropboxcss" >
+            <asp:dropdownlist id="drpCircularType" runat="server" cssclass="dropboxcss">
                 <asp:ListItem>Choose Type</asp:ListItem>
                 <asp:ListItem Value="A"> Adminstration Circular</asp:ListItem>
                 <asp:ListItem Value="O">Office Instruction Memo</asp:ListItem>
@@ -31,6 +22,18 @@
         </td>
         <td class="riskrighttd">
             <asp:requiredfieldvalidator id="requiredfieldvalidator2" runat="server" controltovalidate="drpCircularType" errormessage="select circular type" forecolor="red" initialvalue="choose branch" validationgroup="a">*</asp:requiredfieldvalidator>
+        </td>
+    </tr>
+          <tr>
+        <td class="risklefttd">
+            <div style="float: left">Year</div>
+            <div style="float: right">:</div>
+        </td>
+        <td class="riskrighttd">
+            <asp:Textbox id="lbYear" runat="server" cssclass="textboxcss" text="" ></asp:Textbox>
+        </td>
+        <td class="riskrighttd">
+            <%--<asp:requiredfieldvalidator id="requiredfieldvalidator1" runat="server" controltovalidate="lbYear" errormessage="Enter year" forecolor="red" initialvalue="choose branch" validationgroup="a">*</asp:requiredfieldvalidator>--%>
         </td>
     </tr>
     <tr>
@@ -70,12 +73,21 @@
             <%--<asp:requiredfieldvalidator id="requiredfieldvalidator5" runat="server" controltovalidate="FileUpload1" errormessage="select file" forecolor="red" initialvalue="choose branch" validationgroup="a">*</asp:requiredfieldvalidator>--%>
         </td>
     </tr>
+      <tr>
+        <td class="risklefttd">
+            <div style="float: left">Is For Review</div>
+            <div style="float: right">:</div>
+        </td>
+        <td class="riskrighttd">
+            <asp:CheckBox ID="CheckBox1" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" />
+        </td>
+      </tr>
   </table>
 <asp:Button ID="CircularSave" runat="server" Text="Upload"
     OnClick="CircularSave_Click" CssClass="btnMain btnGreen" />
 <br />
 <br />
-   
+   </div>
 
     <a href="http://192.168.103.77/HRD/2007%20circular/HRD%20TOPIC.htm" target="_blank"><u><h3>Old Circulars</h3></u></a>
     
@@ -120,6 +132,61 @@
     <SortedDescendingCellStyle BackColor="#F6F0C0" />
     <SortedDescendingHeaderStyle BackColor="#7E0000" />
         </asp:GridView>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js"></script>
+
+
+    <script type="text/javascript">
+       
+        $('#ContentPlaceHolder1_drpCircularType').change(function () {
+            console.log($('#ContentPlaceHolder1_drpCircularType').val())
+            if ($('#ContentPlaceHolder1_drpCircularType').val() == 'A')
+                $('#ContentPlaceHolder1_lbYear').val(2019)
+            else if ($('#ContentPlaceHolder1_drpCircularType').val() == 'O')
+                $('#ContentPlaceHolder1_lbYear').val(2076)
+        })
+
+
+        axios.get('http://192.168.103.17:7000/api/tracefile/new/ACircular/')
+		.then(data => {
+                        if(!moment(data.data[0].Created_at).isBefore(moment(), "day")){
+
+                $.each($('#ContentPlaceHolder1_CircularMainGridView').find('td:nth-child(3)'), function(index, val) {
+                    //console.log(val.innerHTML)
+                    if(data.data[0].Year == val.innerHTML){
+                        $.notify.defaults({elementPosition: "right", autoHide: false})
+                        //$.notify("Alert!", {type:"info"});
+
+                        $(this).parent().notify("New","info",{elementPosition: "right", autoHide: false })	
+                    }				
+                });
+                    }
+        });
+
+            axios.get('http://192.168.103.17:7000/api/tracefile/new/OCircular/')
+            .then(data => {
+                //console.log(moment(),"day")
+                //console.log(data.data.Created_at)
+                //console.log(!moment(data.data[0].Created_at).isBefore(moment(), "day"));
+                //console.log(moment().isSame(moment(data.data.Created_at), "day" ) )
+
+            if(!moment(data.data[0].Created_at).isBefore(moment(), "day")){
+                $.each($('#ContentPlaceHolder1_CircularMainGridView').find('td:nth-child(3)'), function(index, val) {
+                   
+                    if(data.data[0].Year == val.innerHTML){
+                        $.notify.defaults({elementPosition: "right", autoHide: false})
+                       
+                        $(this).parent().notify("New","info",{elementPosition: "right", autoHide: false })	
+                    }				
+                });
+            }
+               
+            });
+          
+
+    </script>
 
 </asp:Content>
 

@@ -18,7 +18,7 @@ public class BLLCircular
 		//
 	}
 
-    public int insertCircular(int year, String type, String cirNo, String subject, String filename, String username)
+    public int insertCircular(int year, String type, String cirNo, String subject, String filename, String username, int checkForReview)
     {
         SqlParameter[] param = new SqlParameter[]
         {
@@ -28,8 +28,9 @@ public class BLLCircular
               new SqlParameter("@subject",subject),
               new SqlParameter("@filename",filename),
               new SqlParameter("@username",username),
+              new SqlParameter("@checkForReview", checkForReview)
         };
-        return DAO.IUD(param, "insert into Circular(Year, Type, CirNo, Subject, Filename, Username) values(@year, @type,@cirNo, @subject, @filename,@username)", CommandType.Text);
+        return DAO.IUD(param, "insert into Circular(Year, Type, CirNo, Subject, Filename, Username, CheckForReview) values(@year, @type,@cirNo, @subject, @filename,@username,@checkForReview)", CommandType.Text);
     }
 
     public DataTable GetAllCircular(String type, String year)
@@ -44,6 +45,16 @@ public class BLLCircular
                     SELECT * from Circular where Type = @type and Year = @year order by Id DESC", CommandType.Text);
         return dt;
     }
+
+    public int DeleteCircular(string Id)
+    {
+        SqlParameter[] param = new SqlParameter[]
+        {
+            new SqlParameter("@Id",Id)
+        };
+        return DAO.IUD(param, "deleteCircular", CommandType.StoredProcedure);
+        
+    } 
 
     public DataTable GetMainCircularList()
     {

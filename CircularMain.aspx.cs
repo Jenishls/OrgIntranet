@@ -9,10 +9,21 @@ public partial class CircualarMain : System.Web.UI.Page
 {
 
     BLLCircular bll = new BLLCircular();
+    private int checkForReview = 0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         LoadGridView();
+
+        string status = Session["Status"].ToString();
+
+        if (status != "Admin" )
+        {
+        //    FileUpload1.Visible = false;
+            createCircular.Visible = false;
+            CircularSave.Visible = false;
+        }
+
     }
 
 
@@ -20,17 +31,23 @@ public partial class CircualarMain : System.Web.UI.Page
     {
         if (FileUpload1.HasFile)
         {
+            CircularSave.Visible = false;
             string fileName = DateTime.Now.ToFileTime() + FileUpload1.FileName;
             FileUpload1.PostedFile
                 .SaveAs(Server.MapPath("~/Uploads/") + fileName);
 
             BLLCircular bll = new BLLCircular();
-            int a = bll.insertCircular(Int32.Parse(lbYear.Text), drpCircularType.Text, lbCircularNo.Text, lbSubject.Text, fileName, Session["UserId"].ToString());
-
+           
+            int a = bll.insertCircular(Int32.Parse(lbYear.Text), drpCircularType.Text, lbCircularNo.Text, lbSubject.Text, fileName, Session["UserId"].ToString(), checkForReview);
+            String typo = "";
+            if (drpCircularType.Text == "A")
+                typo = "Administration Circular";
+            else
+                typo = "Office Instruction Memo";
+            
             String body = "Dear All," +
-                            Environment.NewLine + "Please find the " + lbSubject.Text + " for your necessary information and implementation in http://10.10.5.2/Circular.aspx " +
+                            Environment.NewLine + "Please find the " + typo +" No.: "+ lbCircularNo.Text +" regarding "+ lbSubject.Text + " for your necessary information and implementation in http://10.10.5.2/Circular.aspx " +
                             Environment.NewLine + "" +
-
                             Environment.NewLine + "" +
 
                             Environment.NewLine + "With Regards," +
@@ -61,5 +78,17 @@ public partial class CircualarMain : System.Web.UI.Page
         Session["cirYear"] = e.CommandArgument;
         Response.Redirect("~/Circular.aspx");
        
+    }
+    protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+    {
+        if (checkForReview == 0)
+        {
+            checkForReview = 1;
+        }
+        else
+        {
+            checkForReview = 0;
+        }
+        
     }
 }
