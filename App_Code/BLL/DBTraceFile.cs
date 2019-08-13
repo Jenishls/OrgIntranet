@@ -218,6 +218,13 @@ public class DBTraceFile
         DataTable dt = DAO.GetTable(param, "select BranchCode,BranchName,'Branch'=BranchCode+':'+BranchName from BranchTable where BranchCode=@a", CommandType.Text);
         return dt;
     }
+
+    public DataTable GetAllYear()
+    {
+        DataTable dt = DAO.GetTable(null, "select * from Year", CommandType.Text);
+        return dt;
+
+    }
     public DataTable CreateRefNo(string branchcode)
     {
         SqlParameter[] param = new SqlParameter[]

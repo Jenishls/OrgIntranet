@@ -421,4 +421,40 @@ public class DBOpRiskAssess
                         ", CommandType.Text);
         return dt;
     }
+
+    public DataTable GetSummarizedReport(string BranchCode, string Year, string Month)
+    {
+        SqlParameter[] param = new SqlParameter[]
+        {
+             new SqlParameter("@BranchCode",BranchCode),
+             new SqlParameter("@Year",Year),
+             new SqlParameter("@Month",Month)
+        };
+
+        DataTable dt = DAO.GetTable(param, @"
+                    SELECT R.OpId,
+                    'BranchName'=R.BranchCode + ':'+(SELECT BranchName FROM dbo.BranchTable B WHERE R.BranchCode=B.BranchCode),
+                    Year,Month,
+                    'Status'=Case when R.Status='P' then 'Pending'
+		                     when R.Status='A' then 'Approved'
+		                     when R.Status='R' then 'Rejected'
+                             else 'UnKnown' end,
+                    'Wighted'=R.TotalRWE,
+					'RiskLevel'=CASE WHEN R.TotalRWE<='6' THEN 'Inherent Risk Level'
+			                        WHEN R.TotalRWE BETWEEN '6.01' AND '12' THEN 'Low Risk Level'
+			                        WHEN R.TotalRWE BETWEEN '12.01' AND '20' THEN 'Medium Risk Level'
+			                        WHEN R.TotalRWE BETWEEN '20.01' AND '30' THEN 'High Risk Level'
+			                        WHEN R.TotalRWE >30 THEN 'Catastrophic Risk Level' END
+                    
+                    
+                    FROM dbo.OpRiskAssess R(NOLOCK),UserTable U(NOLOCK)
+                    WHERE R.CreatedBy=U.Email
+                    and R.Status in('A','P')
+                    AND R.BranchCode=CASE WHEN UPPER(@BranchCode)='ALL' THEN R.BranchCode ELSE @BranchCode END
+                        AND R.Year = CASE WHEN UPPER(@Year)='ALL' THEN R.Year ELSE @Year END
+                        AND R.Month = CASE WHEN UPPER(@Month)='ALL' THEN R.Month ELSE @Month END
+                    order by R.BranchCode ASC", CommandType.Text);
+        
+        return dt;
+    }
 }

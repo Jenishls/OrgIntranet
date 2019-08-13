@@ -17,15 +17,21 @@ public partial class OpRiskApp : System.Web.UI.Page
     DBOpRiskAssess dra = new DBOpRiskAssess();
     DBBranchTable dbt = new DBBranchTable();
     UserTable dusert = new UserTable();
+    DBTraceFile dre = new DBTraceFile();
+
     DBRiskindicators dbri = new DBRiskindicators();
     DBYear dy = new DBYear();
     public string listFilter = null;
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        LoadDropDown();
         string usertype = Session["Status"].ToString();
         string userid = Session["UserId"].ToString();
         string LoginBranch = Session["BranchCode"].ToString();
         string dept = Session["Department"].ToString();
+
+        btnExportToExcelFilter.Visible = false;
 
         int Lbranch = Int32.Parse(LoginBranch); 
         if (usertype == "CRO" || usertype == "DCEO" || usertype == "CEO" || userid == "binod")
@@ -67,6 +73,21 @@ public partial class OpRiskApp : System.Web.UI.Page
             
         }
 
+    }
+    private void LoadDropDown() {
+        //DataTable dbt = dre.GetAllBranch();
+        //ddlBranchCode.DataSource = dbt;
+        //ddlBranchCode.DataValueField = "BranchCode";
+        //ddlBranchCode.DataTextField = "Branch";
+        //ddlBranchCode.DataBind();
+        //ddlBranchCode.Items.Insert(0, "Choose Branch");
+
+        //DataTable dbt = dre.GetAllYear();
+        //ddlYear.DataSource = dbt;
+        //ddlYear.DataValueField = "Year";
+        //ddlYear.DataTextField = "Year";
+        //ddlYear.DataBind();
+        //ddlYear.Items.Insert(0, "Choose Year");
     }
 
     private void LoadEvents()
@@ -382,5 +403,57 @@ public partial class OpRiskApp : System.Web.UI.Page
 
     public override void VerifyRenderingInServerForm(Control control)
     {
+    }
+
+    public void btnFilter_Click(object sender, EventArgs e) 
+    {
+        gvPending.Visible = false;
+        GridViewFilter.Visible = true;
+        btnExportToExcelFilter.Visible = true;
+        string BranchCode = txtBranchCode.Text;
+        string Year = ddlYear.Text;
+        string Month = ddlMonth.Text;
+        DataTable Rpt = dra.GetSummarizedReport(BranchCode, Year, Month);
+        GridViewFilter.DataSource = Rpt;
+        GridViewFilter.DataBind();
+
+    }
+
+    protected void btnExportToExcel_ClickFilter(object sender, EventArgs e)
+    {
+
+
+        Response.ClearContent();
+
+        Response.AppendHeader("content-disposition", "attachment; filename=Approved/Pending.xls");
+
+        Response.ContentType = "application/excel";
+
+        System.IO.StringWriter stringWriter = new System.IO.StringWriter();
+
+        HtmlTextWriter htw = new HtmlTextWriter(stringWriter);
+
+
+        GridViewFilter.HeaderRow.Style.Add("background-color", "#FFFFFF");
+
+
+        foreach (TableCell tableCell in GridViewFilter.HeaderRow.Cells)
+        {
+            tableCell.Style["background-color"] = "#A55129";
+        }
+
+
+        foreach (GridViewRow gridViewRow in GridViewFilter.Rows)
+        {
+            gridViewRow.BackColor = System.Drawing.Color.White;
+            foreach (TableCell gridViewRowTableCell in gridViewRow.Cells)
+            {
+                gridViewRowTableCell.Style["background-color"] = "#FFF7E7";
+            }
+        }
+
+        GridViewFilter.RenderControl(htw);
+        Response.Write(stringWriter.ToString());
+        Response.End();
     }
 }
