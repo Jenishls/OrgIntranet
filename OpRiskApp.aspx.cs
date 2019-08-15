@@ -30,6 +30,7 @@ public partial class OpRiskApp : System.Web.UI.Page
         string userid = Session["UserId"].ToString();
         string LoginBranch = Session["BranchCode"].ToString();
         string dept = Session["Department"].ToString();
+        
 
         btnExportToExcelFilter.Visible = false;
 
@@ -42,10 +43,14 @@ public partial class OpRiskApp : System.Web.UI.Page
         }
 
         {
-            if (Lbranch > 990 || userid == "sabin1091" || userid == "mohan" || userid == "saroj.bhandari" || userid == "rajeshd" || userid == "kumari9"  || dept == "BOD" || dept.Equals("Admin") || dept == "System" || userid == "sonam1468")
+            if (Lbranch > 990 || userid == "sabin1091" || userid == "mohan" || userid == "saroj.bhandari" || userid == "rajeshd" || userid == "kumari9" || dept == "BOD" || dept.Equals("Admin") || dept == "System" || userid == "sonam1468")
             {
                 btnRPT.Visible = true;
                 h3.Visible = false;
+                Panel2.Visible = true;
+            }
+            else {
+                Panel2.Visible = false;
             }
         }
 
@@ -137,54 +142,14 @@ public partial class OpRiskApp : System.Web.UI.Page
     }
     protected void gvPending_SelectedIndexChanged(object sender, EventArgs e)
     {
-
-        btnApprove.Visible = true;
-        btnDelete.Visible = true;
-        pnldata.Visible = true;
-        Image1.Visible = true;
-        pnlinfo.Visible = false;
-        btnBack.Visible = false;
-        h3.Visible = false;
         string OpId = gvPending.SelectedDataKey.Value.ToString();
-        string status1 = Session["Status"].ToString();
-        string userid1 = Session["UserId"].ToString();
-        DataTable dt = dra.GetFileByOpId(OpId);
-        string status = dt.Rows[0]["Status"].ToString();
-        if (status == "Approved" || status1 != "IsBM" && userid1 != "mukunda" && userid1 != "mohan" && userid1 != "saroj.bhandari" && userid1 != "sonam1468") 
-        
-        {
-            btnApprove.Visible = false;
-            btnDelete.Visible = false;
-        }
-       else
-        {
-            btnApprove.Visible = true;
-            btnDelete.Visible = true;
-        }
-        lblBranchCodeAF.Text = dt.Rows[0]["BranchCode"].ToString();
-        lblBranchNameAF.Text = dt.Rows[0]["BranchName"].ToString();
-        lblReferenceNoAF.Text = dt.Rows[0]["OpId"].ToString();
-        lblLoanNameAF.Text = dt.Rows[0]["Year"].ToString();
-        lblLoanTypeAF.Text = dt.Rows[0]["Month"].ToString();
-        lblLimitTypeAF.Text = dt.Rows[0]["TotalRWE"].ToString();
-        lblLimitAF.Text = dt.Rows[0]["RiskLevel"].ToString();
-        lblCreatedOnAF.Text = Convert.ToDateTime(dt.Rows[0]["CreatedOn"]).ToString();
-        lblCreatedByAF.Text = dt.Rows[0]["CreatedBy"].ToString();
-        lblStatusAF.Text = dt.Rows[0]["Status"].ToString();
-        if (lblStatusAF.Text == "P")
-        {
-            lblStatusAF.Text = "Created/Pending";
-            
-            
-        }
+        riskView(OpId); 
+    }
 
-        else if (lblStatusAF.Text == "A")
-        {
-            lblStatusAF.Text = "Approved";
-            
-        }
-        
-
+    protected void GridViewFilter_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        string OpId = GridViewFilter.SelectedDataKey.Value.ToString();
+        riskView(OpId);
     }
 
     protected void gvPendingDetails_SelectedIndexChanged(object sender, EventArgs e)
@@ -289,6 +254,7 @@ public partial class OpRiskApp : System.Web.UI.Page
     }
     protected void btnDetails_Click(object sender, EventArgs e)
     {
+        Panel2.Visible = false;
         pnldata.Visible = false;
         lblmsg.Visible = false;
         pnlinfo.Visible = false;
@@ -346,6 +312,7 @@ public partial class OpRiskApp : System.Web.UI.Page
     protected void btnRPT_Click(object sender, EventArgs e)
     {
         pnlReport.Visible = true;
+        Panel2.Visible = false;
         btnOK.Visible = true;
         btnBack.Visible = false;
         gvPending.Visible = false;
@@ -455,5 +422,57 @@ public partial class OpRiskApp : System.Web.UI.Page
         GridViewFilter.RenderControl(htw);
         Response.Write(stringWriter.ToString());
         Response.End();
+    }
+
+    protected void riskView(string OpId) 
+    {
+        btnApprove.Visible = true;
+        btnDelete.Visible = true;
+        pnldata.Visible = true;
+        Image1.Visible = true;
+        pnlinfo.Visible = false;
+        Panel2.Visible = false;
+        btnBack.Visible = false;
+        btnRPT.Visible = false;
+        GridViewFilter.Visible = false;
+        h3.Visible = false;
+        //string OpId = gvPending.SelectedDataKey.Value.ToString();
+        string status1 = Session["Status"].ToString();
+        string userid1 = Session["UserId"].ToString();
+        DataTable dt = dra.GetFileByOpId(OpId);
+        string status = dt.Rows[0]["Status"].ToString();
+        if (status == "Approved" || status1 != "IsBM" && userid1 != "mukunda" && userid1 != "mohan" && userid1 != "saroj.bhandari" && userid1 != "sonam1468")
+        {
+            btnApprove.Visible = false;
+            btnDelete.Visible = false;
+        }
+        else
+        {
+            btnApprove.Visible = true;
+            btnDelete.Visible = true;
+        }
+        lblBranchCodeAF.Text = dt.Rows[0]["BranchCode"].ToString();
+        lblBranchNameAF.Text = dt.Rows[0]["BranchName"].ToString();
+        lblReferenceNoAF.Text = dt.Rows[0]["OpId"].ToString();
+        lblLoanNameAF.Text = dt.Rows[0]["Year"].ToString();
+        lblLoanTypeAF.Text = dt.Rows[0]["Month"].ToString();
+        lblLimitTypeAF.Text = dt.Rows[0]["TotalRWE"].ToString();
+        lblLimitAF.Text = dt.Rows[0]["RiskLevel"].ToString();
+        lblCreatedOnAF.Text = Convert.ToDateTime(dt.Rows[0]["CreatedOn"]).ToString();
+        lblCreatedByAF.Text = dt.Rows[0]["CreatedBy"].ToString();
+        lblStatusAF.Text = dt.Rows[0]["Status"].ToString();
+        if (lblStatusAF.Text == "P")
+        {
+            lblStatusAF.Text = "Created/Pending";
+
+
+        }
+
+        else if (lblStatusAF.Text == "A")
+        {
+            lblStatusAF.Text = "Approved";
+
+        }
+        
     }
 }

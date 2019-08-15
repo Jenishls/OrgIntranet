@@ -101,7 +101,7 @@
       <asp:Panel ID="PanelFilterTable" runat="server">
        <center>
         <asp:GridView ID="GridViewFilter" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" DataKeyNames="OpId" 
-            OnSelectedIndexChanged="gvPending_SelectedIndexChanged" GridLines="None">
+            OnSelectedIndexChanged="GridViewFilter_SelectedIndexChanged" GridLines="None">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:TemplateField HeaderText="S.N.">
@@ -114,6 +114,7 @@
                 <asp:BoundField DataField="Status" HeaderText="Status" />
                 <asp:BoundField DataField="Wighted" HeaderText="Wighted" />
                 <asp:BoundField DataField="RiskLevel" HeaderText="RiskLevel" />
+                <asp:CommandField ShowSelectButton="True"  SelectText="Action" />
             </Columns>
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
