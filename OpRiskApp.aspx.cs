@@ -11,7 +11,6 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
-
 public partial class OpRiskApp : System.Web.UI.Page
 {
     DBOpRiskAssess dra = new DBOpRiskAssess();
@@ -474,5 +473,20 @@ public partial class OpRiskApp : System.Web.UI.Page
 
         }
         
+    }
+
+    protected void detailView(string OpId)
+    {
+        Panel2.Visible = false;
+        pnldata.Visible = false;
+        lblmsg.Visible = false;
+        pnlinfo.Visible = false;
+        Image1.Visible = false;
+        btnBack.Visible = true;
+        btnRPT.Visible = false;
+        //string OpId = gvPending.SelectedDataKey.Value.ToString();
+        DataTable dt = dra.GetFileByOpIdAll(OpId);
+        GridView1.DataSource = dt;
+        GridView1.DataBind();
     }
 }

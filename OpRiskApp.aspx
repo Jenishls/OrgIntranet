@@ -191,7 +191,8 @@
                             </div>
                            <div style="float: left; margin-left:20px">
                 <asp:Button ID="btnDetails" runat="server" CssClass="btn" OnClick="btnDetails_Click" style="margin-left: 10px" Text="More Details"></asp:Button>
-                            </div>
+                            
+                           </div>
                        </td>
                        <td>
                                <div style="float: left; margin-left:20px">

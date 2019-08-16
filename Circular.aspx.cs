@@ -62,10 +62,12 @@ public partial class Circular : System.Web.UI.Page
         if (Session["Status"].ToString() == "Admin")
         {
             CircularGridView.Columns[3].Visible = true;
+            CircularGridView.Columns[4].Visible = true;
         }
         else
         {
             CircularGridView.Columns[3].Visible = false;
+            CircularGridView.Columns[4].Visible = false;
         }
     }
 
@@ -137,5 +139,20 @@ public partial class Circular : System.Web.UI.Page
     
     public SortDirection dir { get; set; }
 
+    protected void circular_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        string id = CircularGridView.SelectedDataKey.Value.ToString();
+       
+
+        Panel3.Visible = false;
+        Panel2.Visible = true;
+        LoadReviewList(id);
         
+    }
+
+    protected void LoadReviewList(string id)
+    {
+        GridView1.DataSource = bll.GetCircularReview(id);
+        GridView1.DataBind();
+    }
 }

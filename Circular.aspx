@@ -54,115 +54,14 @@
              }
 
     </style>
-    <asp:Label id="lbOne" runat="server"></asp:Label>
+    
+    
     <div style="font-family:Arial">
+        <asp:Panel ID="Panel3" runat="server">
+        <asp:Label id="lbOne" runat="server"></asp:Label>
         <h3><asp:Label ID="lbtest" runat="server"></asp:Label></h3>
-        <%--<h3 class="auto-style2" id="headingC" runat="server">Circulars</h3>--%>
-        <%--<table class="tablecss">
-            <tr>
-        <td class="risklefttd">
-            <div style="float: left">Year</div>
-            <div style="float: right">:</div>
-        </td>
-        <td class="riskrighttd">
-            <asp:Textbox id="lbYear" runat="server" cssclass="textboxcss" text=""></asp:Textbox>
-        </td>
-        <td class="riskrighttd">
-        </td>
-    </tr>
-            <tr>
-        <td class="risklefttd">
-            <div style="float: left">Circular Type</div>
-            <div style="float: right">:</div>
-        </td>
-        <td class="riskrighttd">
-            <asp:dropdownlist id="drpCircularType" runat="server" cssclass="dropboxcss" >
-                <asp:ListItem>Choose Type</asp:ListItem>
-                <asp:ListItem Value="A"> Adminstration Circular</asp:ListItem>
-                <asp:ListItem Value="O">Office Instruction Memo</asp:ListItem>
-            </asp:dropdownlist>
-        </td>
-        <td class="riskrighttd">
-            <asp:requiredfieldvalidator id="requiredfieldvalidator2" runat="server" controltovalidate="drpCircularType" errormessage="select circular type" forecolor="red" initialvalue="choose branch" validationgroup="a">*</asp:requiredfieldvalidator>
-        </td>
-    </tr>
-            <tr>
-        <td class="risklefttd">
-            <div style="float: left">Circular No.</div>
-            <div style="float: right">:</div>
-        </td>
-        <td class="riskrighttd">
-            <asp:Textbox id="lbCircularNo" runat="server" cssclass="textboxcss" text=""></asp:Textbox>
-        </td>
-        <td class="riskrighttd">
-           
-        </td>
-    </tr>
-            <tr>
-        <td class="risklefttd">
-            <div style="float: left">Subject</div>
-            <div style="float: right">:</div>
-        </td>
-        <td class="riskrighttd">
-         
-            <asp:Textbox id="lbSubject" runat="server" cssclass="textboxcss" text=""></asp:Textbox>
-        </td>
-        <td class="riskrighttd">
-           
-        </td>
-    </tr>
-            <tr>
-        <td class="risklefttd">
-            <div style="float: left">File</div>
-            <div style="float: right">:</div>
-        </td>
-        <td class="riskrighttd">
-            <asp:FileUpload ID="FileUpload1" runat="server" />
-            </td>
-        <td class="riskrighttd">
-          
-        </td>
-    </tr>
-        </table>--%>
-<%--<asp:Button ID="CircularSave" runat="server" Text="Upload"
-    OnClick="CircularSave_Click" CssClass="btnMain btnGreen" />
-<br />--%>
-      
-<%--<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
-    OnRowCommand="GridView1_RowCommand" BackColor="White" 
-    BorderColor="#CC9966" BorderStyle="None" 
-    BorderWidth="1px" CellPadding="10" AllowSorting="True" OnSorting="GridView1_Sorting">
-    <Columns>
-        <asp:BoundField DataField="Date" HeaderText="Date" />
-        <asp:TemplateField HeaderText="File" ShowHeader="False">
-            <ItemTemplate>
-                <asp:LinkButton ID="LinkButton1" runat="server" 
-                    CausesValidation="False" 
-                    CommandArgument='<%# Eval("File") %>'
-                    Text='<%# Eval("File") %>'
-                    OnClick="CircularClick" 
-                    >
-                    </asp:LinkButton>
-            </ItemTemplate>
-        </asp:TemplateField>
-        
-        <asp:BoundField DataField="Type" HeaderText="File Type" />
-    </Columns>
-    <FooterStyle BackColor="#FFFFCC" ForeColor="#330099" />
-    <HeaderStyle BackColor="#990000" Font-Bold="True" 
-        ForeColor="#FFFFCC" />
-    <PagerStyle BackColor="#FFFFCC" ForeColor="#330099" 
-        HorizontalAlign="Center"/>
-    <RowStyle BackColor="White" ForeColor="#330099" />
-    <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="#663399" />
-    <SortedAscendingCellStyle BackColor="#FEFCEB" />
-    <SortedAscendingHeaderStyle BackColor="#AF0101" />
-    <SortedDescendingCellStyle BackColor="#F6F0C0" />
-    <SortedDescendingHeaderStyle BackColor="#7E0000" />
-</asp:GridView>--%>
-
 <asp:GridView ID="CircularGridView" runat="server" AutoGenerateColumns="False" OnRowDataBound="GridView1_RowDataBound"  OnRowDeleting="GridView1_RowDeleting"
-    BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" CellPadding="10" AllowSorting="True" DataKeyNames="Id" OnDataBinding="GridView1_DataBinding">
+    BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" OnSelectedIndexChanged="circular_SelectedIndexChanged" CellPadding="10" AllowSorting="True" DataKeyNames="Id" OnDataBinding="GridView1_DataBinding">
             <Columns>
                 <asp:BoundField DataField="CirNo" HeaderText="No" SortExpression="CirNo" />
                 <asp:TemplateField HeaderText="Subject">
@@ -178,6 +77,7 @@
                         <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete"></asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:CommandField ShowSelectButton="True"  SelectText="Review" />
             </Columns>
     <FooterStyle BackColor="#FFFFCC" ForeColor="#330099" />
     <HeaderStyle BackColor="#990000" Font-Bold="True" 
@@ -192,6 +92,38 @@
     <SortedDescendingCellStyle BackColor="#F6F0C0" />
     <SortedDescendingHeaderStyle BackColor="#7E0000" />
         </asp:GridView>
+         <br />
+    </asp:Panel>
+        <asp:Panel ID="Panel2" runat="server" Visible="false">
+             <h3><asp:Label ID="Label1" runat="server" Text="Branches left to check Circular"></asp:Label></h3>
+
+        <b><asp:Label ID="Label2" runat="server" Text="Circular No"></asp:Label></b>
+            <br />
+        <b><asp:Label ID="Label3" runat="server" Text="Subject"></asp:Label></b>
+             <br /><br />
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False">
+            <Columns>
+            <asp:BoundField DataField="Branch" HeaderText="Branch" SortExpression="Branch" />
+            <asp:BoundField DataField="BM" HeaderText="Branch Manager" SortExpression="BM" />
+            </Columns>
+            <FooterStyle BackColor="#FFFFCC" ForeColor="#330099" />
+    <HeaderStyle BackColor="#990000" Font-Bold="True" 
+        ForeColor="#FFFFCC" />
+    <PagerStyle BackColor="#FFFFCC" ForeColor="#330099" 
+        HorizontalAlign="Center" />
+    <RowStyle BackColor="White" ForeColor="#330099" />
+    <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" 
+        ForeColor="#663399" />
+    <SortedAscendingCellStyle BackColor="#FEFCEB" />
+    <SortedAscendingHeaderStyle BackColor="#AF0101" />
+    <SortedDescendingCellStyle BackColor="#F6F0C0" />
+    <SortedDescendingHeaderStyle BackColor="#7E0000" />
+        </asp:GridView>
+
+        </asp:Panel>
+
+       
+       
 
 </div>
 

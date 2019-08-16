@@ -88,4 +88,20 @@ public class BLLCircular
             return ("Could not send the e-mail - error: " + ex.Message);
         }
     }
+
+    public DataTable GetCircularReview(string id)
+    {
+        SqlParameter[] param = new SqlParameter[]
+        {
+            new SqlParameter("@id",id)
+        };
+
+        DataTable dt = DAO.GetTable(param, @"
+                    select *
+                    from CircularReview
+                    where CirNo = @id
+                    ", CommandType.Text);
+
+        return dt;
+    }
 }
