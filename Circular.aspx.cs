@@ -142,17 +142,39 @@ public partial class Circular : System.Web.UI.Page
     protected void circular_SelectedIndexChanged(object sender, EventArgs e)
     {
         string id = CircularGridView.SelectedDataKey.Value.ToString();
-       
+        
 
         Panel3.Visible = false;
         Panel2.Visible = true;
-        LoadReviewList(id);
+
+        DataTable dt =  bll.CircularDetail(id);
+        //while (record.Read())
+        //{
+        //    ReadSingleRow((IDataRecord)record);
+        //}
+        //Label3.Text = id;
+        Label2.Text = "Circular No : " + dt.Rows[0]["CirNo"].ToString(); ;
+        Label3.Text = "Subject : "+dt.Rows[0]["Subject"].ToString();
+        if (dt.Rows[0]["Subject"].ToString() == "1")
+            LoadReviewList(id);
+        else
+        {
+            GridView1.Visible = false;
+            Label4.Visible = true;
+        }
         
     }
 
     protected void LoadReviewList(string id)
     {
+
+
         GridView1.DataSource = bll.GetCircularReview(id);
         GridView1.DataBind();
+    }
+
+    protected void ReadSingleRow(IDataRecord record)
+    {
+
     }
 }

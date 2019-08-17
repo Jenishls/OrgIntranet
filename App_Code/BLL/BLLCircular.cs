@@ -97,11 +97,24 @@ public class BLLCircular
         };
 
         DataTable dt = DAO.GetTable(param, @"
-                    select *
-                    from CircularReview
-                    where CirNo = @id
+                   select BranchCode, BranchName from BranchTable where BranchCode Not in (select BranchCode from CircularView where CirNo = @id )
                     ", CommandType.Text);
 
         return dt;
+    }
+
+    public DataTable CircularDetail(string id)
+    {
+        SqlParameter[] param = new SqlParameter[]
+        {
+            new SqlParameter("@id",id)
+        };
+
+        DataTable dt = DAO.GetTable(param, @"
+                   select * from Circular where Id = @id
+                    ", CommandType.Text);
+
+        return dt;
+       
     }
 }

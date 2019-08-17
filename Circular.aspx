@@ -101,10 +101,13 @@
             <br />
         <b><asp:Label ID="Label3" runat="server" Text="Subject"></asp:Label></b>
              <br /><br />
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False">
+
+            <b><asp:Label ID="Label4" runat="server" Text="The given circular is not selected for review" Visible="false"></asp:Label></b>
+             <br /><br />
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False"  CellPadding="10" BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px">
             <Columns>
-            <asp:BoundField DataField="Branch" HeaderText="Branch" SortExpression="Branch" />
-            <asp:BoundField DataField="BM" HeaderText="Branch Manager" SortExpression="BM" />
+            <asp:BoundField DataField="BranchCode" HeaderText="Branch Code" SortExpression="Branch" />
+            <asp:BoundField DataField="BranchName" HeaderText="Branch Name" SortExpression="BM" />
             </Columns>
             <FooterStyle BackColor="#FFFFCC" ForeColor="#330099" />
     <HeaderStyle BackColor="#990000" Font-Bold="True" 
