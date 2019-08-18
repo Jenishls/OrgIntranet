@@ -97,7 +97,8 @@ public class BLLCircular
         };
 
         DataTable dt = DAO.GetTable(param, @"
-                   select BranchCode, BranchName from BranchTable where BranchCode Not in (select BranchCode from CircularView where CirNo = @id )
+	 select BranchCode, BranchName from BranchTable where BranchCode Not in (select BranchCode from CircularView where CirNo = (select  distinct CirNo from Circular where Id =  @id))
+                   
                     ", CommandType.Text);
 
         return dt;

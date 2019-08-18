@@ -84,13 +84,13 @@ public partial class CircualarMain : System.Web.UI.Page
 
     protected void CheckBox2_CheckedChanged(object sender, EventArgs e)
     {
-        if (checkForReview == 0)
+        if (checkSendMail == 0)
         {
-            checkForReview = 1;
+            checkSendMail = 1;
         }
         else
         {
-            checkForReview = 0;
+            checkSendMail = 0;
         }
     }
 

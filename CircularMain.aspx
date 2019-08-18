@@ -148,14 +148,39 @@
 
 
     <script type="text/javascript">
-       
+        const setA = () => {
+            $('#ContentPlaceHolder1_lbYear').val(moment().year())
+            
+            $('#ContentPlaceHolder1_lbCircularNo').val(dateIncrease('A')+'/'+moment().year())
+        }
+
+        const setB = () => {
+            $('#ContentPlaceHolder1_lbYear').val(2076)
+            
+            axios.get('http://192.168.103.17:7000/api/tracefile/year/')
+            .then(data => {
+                console.log(data.data[0].Year)
+                $('#ContentPlaceHolder1_lbCircularNo').val(dateIncrease('O')+'/'+data.data[0].Year)
+            })
+        }
+
+        const dateIncrease = (type) => {
+            let a = localStorage.getItem(type)
+            let res = a.split("/")
+            res[0] = parseInt(res[0]) + 1
+            return res[0]
+        }
+
         $('#ContentPlaceHolder1_drpCircularType').change(function () {
             console.log($('#ContentPlaceHolder1_drpCircularType').val())
-            if ($('#ContentPlaceHolder1_drpCircularType').val() == 'A')
-                $('#ContentPlaceHolder1_lbYear').val(2019)
+            if ($('#ContentPlaceHolder1_drpCircularType').val() == 'A'){
+                setA(); 
+            }
             else if ($('#ContentPlaceHolder1_drpCircularType').val() == 'O')
-                $('#ContentPlaceHolder1_lbYear').val(2076)
-        })
+            {
+                setB();
+            }
+            })
 
 
         axios.get('http://192.168.103.17:7000/api/tracefile/new/ACircular/')
@@ -164,6 +189,8 @@
 
                 $.each($('#ContentPlaceHolder1_CircularMainGridView').find('td:nth-child(3)'), function(index, val) {
                     //console.log(val.innerHTML)
+
+                    localStorage.setItem('A',data.data[0].CirNo);
                     if(data.data[0].Year == val.innerHTML){
                         $.notify.defaults({elementPosition: "right", autoHide: false})
                         //$.notify("Alert!", {type:"info"});
@@ -183,7 +210,7 @@
 
             if(!moment(data.data[0].Created_at).isBefore(moment(), "day")){
                 $.each($('#ContentPlaceHolder1_CircularMainGridView').find('td:nth-child(3)'), function(index, val) {
-                   
+                    localStorage.setItem('O',data.data[0].CirNo);
                     if(data.data[0].Year == val.innerHTML){
                         $.notify.defaults({elementPosition: "right", autoHide: false})
                        

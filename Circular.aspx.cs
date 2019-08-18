@@ -155,7 +155,7 @@ public partial class Circular : System.Web.UI.Page
         //Label3.Text = id;
         Label2.Text = "Circular No : " + dt.Rows[0]["CirNo"].ToString(); ;
         Label3.Text = "Subject : "+dt.Rows[0]["Subject"].ToString();
-        if (dt.Rows[0]["Subject"].ToString() == "1")
+        if (dt.Rows[0]["CheckForReview"].ToString() == "1")
             LoadReviewList(id);
         else
         {
