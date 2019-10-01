@@ -452,7 +452,16 @@ public partial class TraceFile : System.Web.UI.Page
         string dept = ddlDepartment.SelectedValue.ToString();
         if (dept != "Choose Department")
         {
-            DataTable dur = dusert.GetUserByDepartment(dept);
+            DataTable dur ;
+            if (dept == "Province  ")
+            {
+               dur = dusert.GetUserByProvince(dept);
+            }
+            else
+            {
+                 dur = dusert.GetUserByDepartment(dept);
+            }
+            
             ddlForwardToAF.DataSource = dur;
             ddlForwardToAF.DataValueField = "Email";
             ddlForwardToAF.DataTextField = "Email";

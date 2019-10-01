@@ -40,11 +40,17 @@ public class UserTable
 
     public DataTable GetUserByDepartment(string department)
     {
+
         SqlParameter[] param = new SqlParameter[]
         {
             new SqlParameter("@a",department)
         };
         return DAO.GetTable(param, "select * from UserTable where Department=@a", CommandType.Text);
+    }
+
+    public DataTable GetUserByProvince(string province)
+    {
+        return DAO.GetTable(null,"select * from UserTable where BranchCode > 990", CommandType.Text);
     }
     public DataTable GetBranchBM(string branch)
     {
@@ -63,6 +69,8 @@ public class UserTable
         };
         return DAO.GetTable(param, "select * from UserTable where UserId=@a and Password=@b", CommandType.Text);
     }
+
+    
     public int CreateUser(string BranchCode,string Department,string UserId, string Password,string FullName,string Email,string Gender,string Designation,string StaffId,string Status,string MobileNo,string Level)
     {
         SqlParameter[] param = new SqlParameter[]
