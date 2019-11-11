@@ -11,6 +11,7 @@ public partial class CircualarMain : System.Web.UI.Page
     BLLCircular bll = new BLLCircular();
     private int checkForReview = 0;
     private int checkSendMail = 0;
+    private int checkAddendum = 0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -18,9 +19,9 @@ public partial class CircualarMain : System.Web.UI.Page
 
         string status = Session["Status"].ToString();
 
-        if (status != "Admin" )
+        if (status != "Admin" && status != "HR")
         {
-        //    FileUpload1.Visible = false;
+        
             createCircular.Visible = false;
             CircularSave.Visible = false;
         }
@@ -47,9 +48,17 @@ public partial class CircualarMain : System.Web.UI.Page
                 typo = "Office Instruction Memo";
 
             if (checkSendMail == 1) {
-                sendMail(typo);
+                if (checkAddendum == 1)
+                {
+                    sendMail1(typo);
+                }
+                else
+                {
+                    sendMail(typo);
+                }
+                
             }
-
+            ScriptManager.RegisterClientScriptBlock(this, GetType(), "alertMessage", @"alert('Circular has been deleted')", true);
             ClientScript.RegisterStartupScript(this.GetType(), "popup", "<script type='text/javascript'>alert(' Circular has been uploaded and email has been sent to everyone@nccbank.com.np ');</script>");
             //lbOne.Text = a.ToString();
             Response.Redirect("~/CircularMain.aspx");
@@ -94,13 +103,44 @@ public partial class CircualarMain : System.Web.UI.Page
         }
     }
 
+    protected void CheckBox3_CheckedChanged(object sender, EventArgs e)
+    {
+        if (checkAddendum == 0)
+        {
+            checkAddendum = 1;
+        }
+        else
+        {
+            checkAddendum = 0;
+        }
+    }
+
     public void sendMail(string typo) 
     {
         String body = "Dear All," +
-                            Environment.NewLine + "Please find the " + typo + " No.: " + lbCircularNo.Text + " regarding '" + lbSubject.Text + "' for your necessary information and implementation in http://10.10.5.2/Circular.aspx " +
+            Environment.NewLine + "" +
+                            Environment.NewLine + "Please find the attachment in http://10.10.5.2/Circular.aspx regarding \"" + lbSubject.Text + "\" for your necessary information and implementation. " +
                             Environment.NewLine + "" +
                             Environment.NewLine + "" +
+                            Environment.NewLine + "" +
+                            Environment.NewLine + "With Regards," +
+                            Environment.NewLine + "Human Resource Department" +
+                            Environment.NewLine + "Head Office" +
+                            Environment.NewLine + "Contact: 01-4246991" +
+                            Environment.NewLine + "Fax: 01-4244936";
 
+
+        String status = bll.SendMail(lbSubject.Text, body);
+    }
+
+    public void sendMail1(string typo)
+    {
+        String body = "Dear All," +
+            Environment.NewLine + "" +
+                            Environment.NewLine + "Please find the attachment in http://10.10.5.2/Circular.aspx of " + lbCircularNo.Text + " regarding \"" + lbSubject.Text + "\" for your necessary information and implementation. " +
+                            Environment.NewLine + "" +
+                            Environment.NewLine + "" +
+                            Environment.NewLine + "" +
                             Environment.NewLine + "With Regards," +
                             Environment.NewLine + "Human Resource Department" +
                             Environment.NewLine + "Head Office" +
