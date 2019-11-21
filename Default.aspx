@@ -42,7 +42,32 @@
         </div>--%>
     
     </span>
-     
+    <div id="ex1" class="modal">
+        <img id="dashain_img" src="images/happy_dashain.jpg" style="width:inherit" /></br>
+        <span style="
+             padding-right: 40px;
+             float: right;
+             font-weight: bold;
+            color: red;
+            ">
+            IT Department
+        </span>
+    </div>
+
+     <script src="js/modal.js"></script>
+<%--    <script> 
+        jQuery(document).ready(function ($) {
+            $("#ex1").modal();
+            jQuery(document).ready(function($) {
+                $('#dashain_img').parent().css({
+                    "padding-left": '42px',
+                    "padding-right": '0',
+                    "padding-top": '32px'
+            });
+        });
+        });
+        
+    </script>--%>
   
 </asp:Content>
 

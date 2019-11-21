@@ -36,6 +36,7 @@
     <link href="Style.css" rel="stylesheet" type="text/css" />
     <script src="js/alertify.min.js"></script>
     <link href="css/alertify.min.css" rel="stylesheet" />
+    <link href="css/modal.css" rel="stylesheet" />
 
     <%-- JSDatePickerin TextBox --%>
     <link href="js/jquery-ui.css" rel="stylesheet" />
