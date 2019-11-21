@@ -61,7 +61,7 @@
         <asp:Label id="lbOne" runat="server"></asp:Label>
         <h3><asp:Label ID="lbtest" runat="server"></asp:Label></h3>
 <asp:GridView ID="CircularGridView" runat="server" AutoGenerateColumns="False" OnRowDataBound="GridView1_RowDataBound"  OnRowDeleting="GridView1_RowDeleting"
-    BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" OnSelectedIndexChanged="circular_SelectedIndexChanged" CellPadding="10" AllowSorting="True" DataKeyNames="Id" OnDataBinding="GridView1_DataBinding">
+    BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" OnSelectedIndexChanged="circular_SelectedIndexChanged" CellPadding="10" AllowSorting="False" DataKeyNames="Id" OnDataBinding="GridView1_DataBinding">
             <Columns>
                 <asp:BoundField DataField="CirNo" HeaderText="No" SortExpression="CirNo" />
                 <asp:TemplateField HeaderText="Subject">
@@ -133,12 +133,23 @@
     <script>
         jQuery(document).ready(function ($) {
             $("#ContentPlaceHolder1_CircularGridView a").on('click', function (e) {
+		header()
                 e.preventDefault();
                 console.log($(this).attr('href'))
                 localStorage.setItem('CirNo', $(this).parent().parent().children().first().text())
                 location.href = $(this).attr('href')
             })
         });
+	const header = () => {
+		let typeCir = $('#ContentPlaceHolder1_CircularGridView').find('tr:nth-child(2)').children().first().text()
+let year = typeCir.split('/')
+console.log(year[1])
+if(moment().year() == year[1])
+	$('#ContentPlaceHolder1_CircularGridView').find('tr').first().children().first().text('Circular No')
+else
+	$('#ContentPlaceHolder1_CircularGridView').find('tr').first().children().first().text('OIM No')
+	}
+
     </script>
 </asp:Content>
 

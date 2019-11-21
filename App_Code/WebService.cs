@@ -51,5 +51,90 @@ public class WebService : System.Web.Services.WebService {
         }
     }
 
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string[] ACircular()
+    {
+        List<string> circular = new List<string>();
+        using (SqlConnection conn = new SqlConnection())
+        {
+            conn.ConnectionString = ConfigurationManager
+                    .ConnectionStrings["myconnection"].ConnectionString;
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "select * from Circular where  Id = (select max(Id) as Max from Circular where Type = 'A' )";
+
+                cmd.Connection = conn;
+                conn.Open();
+                using (SqlDataReader sdr = cmd.ExecuteReader())
+                {
+                    while (sdr.Read())
+                    {
+                        circular.Add(string.Format("{0}|{1}|{2}", sdr["Created_at"],sdr["CirNo"],sdr["Year"]));
+                    }
+                }
+                conn.Close();
+            }
+            return circular.ToArray();
+        }
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string[] OCircular()
+    {
+        List<string> circular = new List<string>();
+        using (SqlConnection conn = new SqlConnection())
+        {
+            conn.ConnectionString = ConfigurationManager
+                    .ConnectionStrings["myconnection"].ConnectionString;
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "select * from Circular where  Id = (select max(Id) as Max from Circular where Type = 'O' )";
+
+                cmd.Connection = conn;
+                conn.Open();
+                using (SqlDataReader sdr = cmd.ExecuteReader())
+                {
+                    while (sdr.Read())
+                    {
+                        circular.Add(string.Format("{0}|{1}|{2}", sdr["Created_at"], sdr["CirNo"], sdr["Year"]));
+                    }
+                }
+                conn.Close();
+            }
+            return circular.ToArray();
+        }
+    }
+
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string[] Year()
+    {
+        List<string> circular = new List<string>();
+        using (SqlConnection conn = new SqlConnection())
+        {
+            conn.ConnectionString = ConfigurationManager
+                    .ConnectionStrings["myconnection"].ConnectionString;
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "select Max(Year) as Year from Year";
+
+                cmd.Connection = conn;
+                conn.Open();
+                using (SqlDataReader sdr = cmd.ExecuteReader())
+                {
+                    while (sdr.Read())
+                    {
+                        circular.Add(string.Format("{0}",sdr["Year"]));
+                    }
+                }
+                conn.Close();
+            }
+            return circular.ToArray();
+        }
+    }
+
     
 }

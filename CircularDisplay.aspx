@@ -22,7 +22,7 @@
 
             obj  = {CirNo : localStorage.getItem('CirNo')}
             if('<%=Session["Status"].ToString() %>' == 'IsBM'){
-            axios.post("http://192.168.103.17:7000/api/tracefile/circularDetail/",obj)
+            axios.post("http://192.168.103.13:7000/api/tracefile/circularDetail/",obj)
             .then(data => {
                 
                 if(data.data[0].CheckForReview == 0 )
@@ -52,7 +52,7 @@
                       'UserId': '<%=Session["UserId"].ToString() %>',
                       'Status' : ' 1 '
                   };
-                  axios.post("http://192.168.103.17:7000/api/tracefile/circularViewed",obj)
+                  axios.post("http://192.168.103.13:7000/api/tracefile/circularViewed",obj)
                   .then(data => console.log(data)  )
                   console.log({
                       'CirId': localStorage.getItem('CirNo'),
