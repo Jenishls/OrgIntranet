@@ -291,18 +291,20 @@ public partial class UserRelated : System.Web.UI.Page
         if (btnSave.Text == "Save")
         {
             int i = ut.CreateUser(ddlBranchCode.Text, ddlDepartment.Text, lblUserIdC.Text, txtPassword.Text, txtFullName.Text, txtEmail.Text, txtGender.Text, ddlDesignation.Text, txtStaffId.Text, ddlStatus.Text, txtMobileNo.Text, ddlLevel.SelectedValue);
+            int j = ut.CreateLog(ddlBranchCode.Text, ddlDepartment.Text, lblUserIdC.Text, txtPassword.Text, txtFullName.Text, txtEmail.Text, txtGender.Text, ddlDesignation.Text, txtStaffId.Text, ddlStatus.Text, txtMobileNo.Text, ddlLevel.SelectedValue, Session["UserId"].ToString());
             if (i > 0)
             {
                 //string Alert = "User Created:"+" "+lblUserIdC.Text;
                 ClientScript.RegisterStartupScript(this.GetType(), "popup", @"<script type='text/javascript'>alertify.alert('NCC Intranet','" + lblUserIdC.Text + " <br /> User Created Successfully.');</script>");
                 MultiView1.ActiveViewIndex = 3;
-                return;
 
+               return;
             }
         }
         if (btnSave.Text == "Update")
         {
             int i = ut.UpdateUser(ddlBranchCode.Text, ddlDepartment.Text, lblUserIdC.Text, txtFullName.Text, txtEmail.Text, txtGender.Text, ddlDesignation.Text, txtStaffId.Text, ddlStatus.Text, txtMobileNo.Text, ddlLevel.SelectedValue);
+            int j = ut.CreateLog(ddlBranchCode.Text, ddlDepartment.Text, lblUserIdC.Text, txtPassword.Text, txtFullName.Text, txtEmail.Text, txtGender.Text, ddlDesignation.Text, txtStaffId.Text, ddlStatus.Text, txtMobileNo.Text, ddlLevel.SelectedValue, Session["username"].ToString());
             if (i > 0)
             {
                 string Alert = "User Updated:" + " " + lblUserIdC.Text;

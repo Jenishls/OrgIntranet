@@ -91,6 +91,27 @@ public class UserTable
         return DAO.IUD(param, "Insert into UserTable Values(@a,@b,@c,@d,@e,@f,@g,@h,@i,@j,@k,@l)", CommandType.Text);
     }
 
+    public int CreateLog(string BranchCode, string Department, string UserId, string Password, string FullName, string Email, string Gender, string Designation, string StaffId, string Status, string MobileNo, string Level, string UpdatedBy)
+    {
+        SqlParameter[] param = new SqlParameter[]
+        {
+            new SqlParameter("@a",BranchCode),
+            new SqlParameter("@b",Department),
+            new SqlParameter("@c",UserId),
+            new SqlParameter("@d",Password),
+            new SqlParameter("@e",FullName),
+            new SqlParameter("@f",Email),
+            new SqlParameter("@g",Gender),
+            new SqlParameter("@h",Designation),
+            new SqlParameter("@i",StaffId),
+            new SqlParameter("@j",Status),
+            new SqlParameter("@k",MobileNo),
+            new SqlParameter("@l",Level),
+            new SqlParameter("@m",UpdatedBy)
+        };
+        return DAO.IUD(param, "Insert into UserTableLog(BranchCode,Department,UserId,Password,FullName,Email,Gender,Designation,StaffId,Status,MobileNo,Level,UpdatedBy) Values(@a,@b,@c,@d,@e,@f,@g,@h,@i,@j,@k,@l,@m)", CommandType.Text);
+    }
+
     public int GetIp(string userid , string ip)
     {
         SqlParameter[] param = new SqlParameter[]
