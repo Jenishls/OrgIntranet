@@ -119,7 +119,7 @@ public partial class CircualarMain : System.Web.UI.Page
     {
         String body = "Dear All," +
             Environment.NewLine + "" +
-            Environment.NewLine + "Please find attached herewith the" + typo + "No: " + lbCircularNo.Text + " regarding \"" + lbSubject.Text + "\" for your necessary information and implementation. " +
+            Environment.NewLine + "Please find attached herewith the" + typo + "No: " + lbCircularNo.Text + " regarding \"" + lbSubject.Text + "\" in NCC Intranet Site http://10.10.5.2/Circular.aspx for your necessary information and implementation. " +
                             Environment.NewLine + "" +
                             Environment.NewLine + "" +
                             Environment.NewLine + "" +
@@ -137,7 +137,7 @@ public partial class CircualarMain : System.Web.UI.Page
     {
         String body = "Dear All," +
             Environment.NewLine + "" +
-                            Environment.NewLine + "Please find attached herewith the" + lbCircularNo.Text + " regarding \"" + lbSubject.Text + "\" for your necessary information and implementation. " +
+                            Environment.NewLine + "Please find attached herewith the" + lbCircularNo.Text + " regarding \"" + lbSubject.Text + "\" in NCC Intranet Site http://10.10.5.2/Circular.aspx for your necessary information and implementation. " +
                             Environment.NewLine + "" +
                             Environment.NewLine + "" +
                             Environment.NewLine + "" +
