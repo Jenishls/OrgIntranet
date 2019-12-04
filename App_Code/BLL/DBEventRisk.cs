@@ -59,7 +59,7 @@ public class DBEventRisk
         SELECT R.RiskId,'BranchCode'=BT.BranchCode,'BranchName'=BT.BranchName,ReferenceNo,
         'ORT'=RT.RiskType,'NOI'=NI.IncidentNature,DOI,DIIF,
         'LOR'=RL.RiskLevelType,BFI,AIR,POL,GOLYTD,NM,RI,ED,ATTD,FPRC,LastForwardedTo,Status,
-        (select FullName from UserTable where R.CreatedBy=Email) as CreatedBy,
+        (select FullName from UserTable where R.CreatedBy=Email and Status != 'IsClosed') as CreatedBy,
         CONVERT(SMALLDATETIME, CreatedOn,103) AS CreatedOn
  
         FROM RiskEvent R(NOLOCK),dbo.RiskLevel RL(NOLOCK),
