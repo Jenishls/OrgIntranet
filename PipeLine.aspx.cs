@@ -13,6 +13,7 @@ public partial class PipeLine : System.Web.UI.Page
     DBBranchTable bt = new DBBranchTable();
     protected void Page_Load(object sender, EventArgs e)
     {
+        btnExportToExcel.Visible = false;
         string branch = Session["BranchCode"].ToString();
         int Lbranch = Int32.Parse(branch); 
         if(branch == "000" || Lbranch > 990 )
@@ -29,8 +30,8 @@ public partial class PipeLine : System.Web.UI.Page
             ddlRpt.Items.Insert(0, "Choose Report");
             ddlType.Items.Insert(0, "Choose Type");
         }
-       
     }
+
     protected void btnGo_Click(object sender, EventArgs e)
     {
         if (ddlType.SelectedItem.ToString() == "Loan")
@@ -54,27 +55,30 @@ public partial class PipeLine : System.Web.UI.Page
 
     }
 
-    protected void ddlRpt_SelectedIndexChanged(object sender, EventArgs e)
+    protected void btnSearch_Click(object sender, EventArgs e)
     {
-
         if (ddlRpt.SelectedValue == "ALL")
         {
             GetReportALL();
+            btnExportToExcel.Visible = true;
             Branch.Visible = false;
         }
         else if (ddlRpt.SelectedValue == "Branch Wise")
         {
             //txtBranch.Visible = true;
             GetReportByBranch();
+            btnExportToExcel.Visible = true;
             Branch.Visible = false;
         }
         else
         {
             GetReportByProvince();
+            btnExportToExcel.Visible = true;
             Branch.Visible = false;
         }
-        
     }
+
+
     protected void btnOk_Click(object sender, EventArgs e)
     {
 

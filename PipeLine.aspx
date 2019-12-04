@@ -41,7 +41,7 @@
                     <asp:TextBox ID="txtBranch" runat="server" CssClass="textboxcss" Placeholder="BranchCode" Width="7em"></asp:TextBox>
                     </div>
                 <div style="padding-bottom:.5em">
-                    <asp:DropDownList ID="ddlRpt" runat="server" Height="2.5em" CssClass="dropboxcss" OnSelectedIndexChanged="ddlRpt_SelectedIndexChanged" AutoPostBack="true" ForeColor="Blue" Width="11em">
+                    <asp:DropDownList ID="ddlRpt" runat="server" Height="2.5em" CssClass="dropboxcss" AutoPostBack="true" ForeColor="Blue" Width="11em">
                         <asp:ListItem>ALL</asp:ListItem>
                         <asp:ListItem>Branch Wise</asp:ListItem>
                         <asp:ListItem>Province Wise</asp:ListItem>
@@ -54,6 +54,7 @@
                     <asp:TextBox ID="txtEDate" runat="server" CssClass="textboxcss" placeholder="To Date" Width="7em"></asp:TextBox>
                     </div>--%>
                 <div style="padding-bottom:.5em">
+                    <asp:Button ID="btnSearch" CssClass="btn" runat="server" Text="Search" OnClick="btnSearch_Click" />
                     <asp:Button ID="btnExportToExcel" CssClass="btn" runat="server" Text="Export to excel" OnClick="btnExportToExcel_Click" />
                 </div>
                 </div>
