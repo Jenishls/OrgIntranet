@@ -61,13 +61,15 @@ public partial class Circular : System.Web.UI.Page
     {
         if (Session["Status"].ToString() == "Admin")
         {
-            CircularGridView.Columns[3].Visible = true;
-            CircularGridView.Columns[4].Visible = true;
+            CircularGridView.Columns[5].Visible = true;
+            CircularGridView.Columns[6].Visible = true;
+            //CircularGridView.Columns[7].Visible = true;
         }
         else
         {
-            CircularGridView.Columns[3].Visible = false;
-            CircularGridView.Columns[4].Visible = false;
+            CircularGridView.Columns[5].Visible = false;
+            CircularGridView.Columns[6].Visible = false;
+            //CircularGridView.Columns[7].Visible = true;
         }
     }
 
@@ -167,8 +169,6 @@ public partial class Circular : System.Web.UI.Page
 
     protected void LoadReviewList(string id)
     {
-
-
         GridView1.DataSource = bll.GetCircularReview(id);
         GridView1.DataBind();
     }
@@ -176,5 +176,27 @@ public partial class Circular : System.Web.UI.Page
     protected void ReadSingleRow(IDataRecord record)
     {
 
+    }
+    protected void CircularGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+        CircularGridView.EditIndex = -1;
+        LoadGridView1();
+    }
+
+    protected void CircularGridView_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        CircularGridView.EditIndex = e.NewEditIndex;
+    }
+    protected void CircularGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        int id = Int32.Parse(CircularGridView.DataKeys[e.RowIndex].Value.ToString());
+        GridViewRow row = (GridViewRow)CircularGridView.Rows[e.RowIndex];
+        Label lblId = (Label)row.FindControl("lblId");
+        TextBox textCirNo = (TextBox) row.Cells[0].Controls[0];
+        TextBox textNDate = (TextBox) row.Cells[2].Controls[0];
+        TextBox textEDate = (TextBox) row.Cells[3].Controls[0];
+        CircularGridView.EditIndex = -1;
+        bll.updateCircular(textCirNo.Text,textNDate.Text,textEDate.Text,id);
+        LoadGridView1();
     }
 }

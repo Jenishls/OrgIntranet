@@ -61,7 +61,8 @@
         <asp:Label id="lbOne" runat="server"></asp:Label>
         <h3><asp:Label ID="lbtest" runat="server"></asp:Label></h3>
 <asp:GridView ID="CircularGridView" runat="server" AutoGenerateColumns="False" OnRowDataBound="GridView1_RowDataBound"  OnRowDeleting="GridView1_RowDeleting"
-    BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" OnSelectedIndexChanged="circular_SelectedIndexChanged" CellPadding="10" AllowSorting="False" DataKeyNames="Id" OnDataBinding="GridView1_DataBinding">
+    BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" OnSelectedIndexChanged="circular_SelectedIndexChanged" CellPadding="10" AllowSorting="False" DataKeyNames="Id" OnDataBinding="GridView1_DataBinding"
+    OnRowEditing="CircularGridView_RowEditing" OnRowUpdating="CircularGridView_RowUpdating" >
             <Columns>
                 <asp:BoundField DataField="CirNo" HeaderText="No" SortExpression="CirNo" />
                 <asp:TemplateField HeaderText="Subject">
@@ -70,8 +71,10 @@
                             <%--<asp:LinkButton ID="circularLink" runat="server" CausesValidation="False" Text="<%#Eval("Subject") %>"></asp:LinkButton>--%>
                         </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="Created_at" HeaderText="Date" SortExpression="Created_at" />
+                <asp:BoundField DataField="NepDate" HeaderText="Date (B.S.)" />
+                <asp:BoundField DataField="EngDate" HeaderText="Date (A.D.)" />
                 <%--<asp:BoundField DataField="Date" HeaderText="Date" SortExpression="Date" />--%>
+                <asp:CommandField ShowEditButton="true"/>
                 <asp:TemplateField ShowHeader="False">
                     <ItemTemplate>
                         <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete"></asp:LinkButton>

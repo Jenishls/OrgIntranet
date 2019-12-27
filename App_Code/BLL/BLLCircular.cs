@@ -18,19 +18,21 @@ public class BLLCircular
 		//
 	}
 
-    public int insertCircular(int year, String type, String cirNo, String subject, String filename, String username, int checkForReview)
+    public int insertCircular(int year, String type, String cirNo,String nep, String eng, String subject, String filename, String username, int checkForReview)
     {
         SqlParameter[] param = new SqlParameter[]
         {
            new SqlParameter("@year",year),
              new SqlParameter("@type",type),
               new SqlParameter("@cirNo",cirNo),
+              new SqlParameter("@nep",nep),
+              new SqlParameter("@eng",eng),
               new SqlParameter("@subject",subject),
               new SqlParameter("@filename",filename),
               new SqlParameter("@username",username),
               new SqlParameter("@checkForReview", checkForReview)
         };
-        return DAO.IUD(param, "insert into Circular(Year, Type, CirNo, Subject, Filename, Username, CheckForReview) values(@year, @type,@cirNo, @subject, @filename,@username,@checkForReview)", CommandType.Text);
+        return DAO.IUD(param, "insert into Circular(Year, Type, CirNo, NepDate,EngDate, Subject, Filename, Username, CheckForReview) values(@year, @type,@cirNo,@nep,@eng, @subject, @filename,@username,@checkForReview)", CommandType.Text);
     }
 
     public DataTable GetAllCircular(String type, String year)
@@ -116,6 +118,18 @@ public class BLLCircular
                     ", CommandType.Text);
 
         return dt;
-       
+    }
+
+    public int updateCircular(string cirNo, string NDate, string EDate, int id)
+    {
+        SqlParameter[] param = new SqlParameter[]
+        {
+           new SqlParameter("@cirNo",cirNo),
+           new SqlParameter("@NDate",NDate),
+           new SqlParameter("@EDate",EDate),
+           new SqlParameter("@id",id),
+        };
+        return DAO.IUD(param, "update Circular set  CirNo = @cirNo , NepDate =  @NDate ,EngDate =  @EDate where Id = @id", CommandType.Text);
+   
     }
 }

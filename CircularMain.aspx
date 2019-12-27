@@ -50,6 +50,31 @@
     </tr>
     <tr>
         <td class="risklefttd">
+            <div style="float: left">Nepali Date</div>
+            <div style="float: right">:</div>
+        </td>
+        <td class="riskrighttd">
+            <asp:Textbox id="lbNep" runat="server" cssclass="textboxcss" text=""></asp:Textbox>
+        </td>
+        <td class="riskrighttd">
+            <%--<asp:requiredfieldvalidator id="requiredfieldvalidator3" runat="server" controltovalidate="lbCircularNo" errormessage="Enter circular no " forecolor="red" initialvalue="choose branch" validationgroup="a">*</asp:requiredfieldvalidator>--%>
+        </td>
+    </tr>
+    <tr>
+        <td class="risklefttd">
+            <div style="float: left">English Date</div>
+            <div style="float: right">:</div>
+        </td>
+        <td class="riskrighttd">
+            <asp:Textbox id="lbEng" runat="server" cssclass="textboxcss" text=""></asp:Textbox>
+        </td>
+        <td class="riskrighttd">
+            <%--<asp:requiredfieldvalidator id="requiredfieldvalidator3" runat="server" controltovalidate="lbCircularNo" errormessage="Enter circular no " forecolor="red" initialvalue="choose branch" validationgroup="a">*</asp:requiredfieldvalidator>--%>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="risklefttd">
             <div style="float: left">Subject</div>
             <div style="float: right">:</div>
         </td>

@@ -40,7 +40,7 @@ public partial class CircualarMain : System.Web.UI.Page
 
             BLLCircular bll = new BLLCircular();
            
-            int a = bll.insertCircular(Int32.Parse(lbYear.Text), drpCircularType.Text, lbCircularNo.Text, lbSubject.Text, fileName, Session["UserId"].ToString(), checkForReview);
+            int a = bll.insertCircular(Int32.Parse(lbYear.Text), drpCircularType.Text, lbCircularNo.Text,lbNep.Text,lbEng.Text, lbSubject.Text, fileName, Session["UserId"].ToString(), checkForReview);
             String typo = "";
             if (drpCircularType.Text == "A")
                 typo = "Administration Circular";
