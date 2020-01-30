@@ -39,7 +39,7 @@
         Application.Lock();
         Application["TotalOnlineUsers"] = (int)Application["TotalOnlineUsers"] - 1;
         Application.UnLock(); 
-       Response.Redirect("Login.aspx");
+       //Response.Redirect("Login.aspx");
         // Code that runs when a session ends. 
         // Note: The Session_End event is raised only when the sessionstate mode
         // is set to InProc in the Web.config file. If session mode is set to StateServer 
