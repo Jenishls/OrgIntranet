@@ -173,9 +173,12 @@
                                     <asp:MenuItem Text="BankSmart" Value="BankSmart" NavigateUrl="~/BankSmart.aspx"></asp:MenuItem>
                                     <asp:MenuItem Text="Auxiliary Service" Value="Auxiliary Service" NavigateUrl="~/AuxiliaryService.aspx"></asp:MenuItem>
                                     <asp:MenuItem Text="Remittance" Value="Remittance" NavigateUrl="~/Remittance/RemitContact.aspx"></asp:MenuItem>
-                                    <asp:MenuItem Text="RF Unit" Value="Remittance" NavigateUrl="~/RFUnit.aspx"></asp:MenuItem>
+                                    
 
-                                    <asp:MenuItem Text="Contact" Value="Contact" NavigateUrl="~/Branches.aspx"></asp:MenuItem>
+                                     <asp:MenuItem Text="Department" Value="Department">
+                                         <asp:MenuItem Text="CTFU" Value="CTFU" NavigateUrl="~/CTFU.aspx"></asp:MenuItem>
+                                         <asp:MenuItem Text="RF Unit" Value="Remittance" NavigateUrl="~/RFUnit.aspx"></asp:MenuItem>
+                                     </asp:MenuItem>
                                     <asp:MenuItem Text="IT Unit" Value="Contact" NavigateUrl="~/ITUnit.aspx"></asp:MenuItem>
                                 </Items>
                                 <StaticHoverStyle BackColor="#D1330E" />
