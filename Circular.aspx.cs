@@ -7,7 +7,6 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.IO;
 
-
 public partial class Circular : System.Web.UI.Page
 {
     BLLCircular bll = new BLLCircular();
