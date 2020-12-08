@@ -6,6 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
+using Newtonsoft.Json;
+using System.Data;
+using System.Data.SqlClient;
 
 /// <summary>
 /// Summary description for WebServicePep
@@ -50,5 +53,26 @@ public class WebServicePep : System.Web.Services.WebService {
             return Users.ToArray();
         }
     }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public String GetPepDetail(string prefix)
+    {
+        SqlParameter[] param = new SqlParameter[]
+        {
+            new SqlParameter("@prefix",prefix)
+        };
+        DataTable dt = DAO.GetTable(param, @"
+                    SELECT * from PepList where Name = @prefix order by Id DESC", CommandType.Text);
+
+        //return dt;
+        return convertToJson(dt);
+    }
+
+   public string convertToJson(DataTable table) {  
+        string JSONString=string.Empty;  
+        JSONString = JsonConvert.SerializeObject(table);  
+        return JSONString;  
+    } 
     
 }

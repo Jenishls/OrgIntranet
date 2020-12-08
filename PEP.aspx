@@ -72,9 +72,58 @@
                                                             $("[id$=hfUserId]").val(i.item.val);
                                                         },
                                                         minLength: 1
-                                                    });
-                                                });
+                            });
+
+                            $('[id$=btnSearch]').click(function (e) {
+                                let txtForwardTo = $("[id$=txtForwardTo]").val();
+                                //console.log(txtForwardTo);
+                                e.preventDefault();
+                                $.ajax({
+                                    url: '<%=ResolveUrl("~/WebServicePep.asmx/GetPepDetail")%>',
+                                    data: "{ 'prefix': '" + txtForwardTo + "'}",
+                                    dataType: "json",
+                                    type: "POST",
+                                    contentType: "application/json; charset=utf-8",
+                                    success: function (data) {
+                                        let a = JSON.parse(data.d)
+                                        let display = '';
+                                        a.forEach(function (item, index) {
+                                            console.log(item)
+                                            display = display + `<br/> <hr/> <br/> <table>`
+                                            Object.keys(item).forEach(function (key) {
+
+                                                display = display + `
+                                                <tr>
+                                                <td style="width:200px">${key}
+                                                </td>
+                                                <td>   </td>
+                                                <td>
+                                                  ${item[key]}
+                                                </td>
+                                                </tr>` 
+                                            });
+                                            display = display + `</table>`
+                                        })
+                                        $('[id$=showData]').empty().append(display)
+                                        $('[id$=btnPrint]').show();
+                                        $('[id$=pnl1]').show();
+                                    },
+                                    error: function (response) {
+                                        alert(response.responseText);
+                                    },
+                                    failure: function (response) {
+                                        alert(response.responseText);
+                                    }
+                                });
+                            });
+                        });
+
+
+  
                     </script>
+                     <script type="text/javascript">
+
+        </script>
                     <asp:TextBox ID="txtForwardTo" runat="server" CssClass="textboxcss"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtForwardTo" ErrorMessage="Name Required" ForeColor="Red" ValidationGroup="a">*</asp:RequiredFieldValidator>
                     <asp:HiddenField ID="hfUserId" runat="server" />
@@ -82,9 +131,9 @@
             </tr>
         </table>
         <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red" ValidationGroup="a" />
-        <asp:Button ID="SearchByTagButton" CssClass="btnMain btnGreen" runat="server" Text="SEARCH"
-            OnClick="SearchByTagButton_Click" ValidationGroup="a"  /><br />
+        <button id="btnSearch" class="btnMain btnGreen" >Search</button><br />
         <br />
+        <div id="showData"></div>
         <asp:Label ID="lblMsg" runat="server" Visible="false" Text=""></asp:Label>
         <br />
         <asp:Panel ID="pnlTable" runat="server">
@@ -217,7 +266,7 @@
      <SortedDescendingHeaderStyle BackColor="#93451F" />
  </asp:GridView> </center>--%>
         <br />
-        <asp:Panel ID="pnl1" runat="server">
+        <asp:Panel ID="pnl1" runat="server" style =" display:none">
             <span class="auto-style2"><strong>Searched By:</strong></span>
             <asp:Label ID="lblName" runat="server" Text="" Style="font-weight: 700; background-color: #99FF99"></asp:Label>
             <br />
@@ -231,7 +280,7 @@
         </asp:Panel>
     </div>
     <br />
-    <asp:Button ID="btnPrint" CssClass="btnMain btnGreen" runat="server" Text="Print" OnClientClick="return printpage();" OnClick="btnPrint_Click" />
-
+    <asp:Button ID="btnPrint" CssClass="btnMain btnGreen" runat="server" Text="Print" OnClientClick="return printpage();" OnClick="btnPrint_Click"  style ="display: none "/>
+           
 </asp:Content>
 

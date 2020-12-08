@@ -14,16 +14,20 @@ public partial class PEP : System.Web.UI.Page
     UserTable dusert = new UserTable();
     protected void Page_Load(object sender, EventArgs e)
     {
-        btnPrint.Visible = false;
-        pnl1.Visible = false;
+        btnPrint.Visible = true;
+        pnl1.Visible = true;
         pnlTable.Visible = false;
         //SearchByTagTB.Text = "";
+        string branch = Session["BranchCode"].ToString();
+        string user = Session["FullName"].ToString();
+        lblBranch.Text = branch;
+        lblName.Text = user;
+        lblDate.Text = DateTime.Now.ToString();
     }
 
     protected void SearchByTagButton_Click(object sender, EventArgs e)
     {
-        string branch = Session["BranchCode"].ToString();
-        string user = Session["FullName"].ToString();
+        
         String strConn = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
         SqlConnection conn = new SqlConnection(strConn);
         conn.Open();
@@ -71,9 +75,8 @@ public partial class PEP : System.Web.UI.Page
         conn.Close();
         btnPrint.Visible = true;
         pnl1.Visible = true;
-        lblBranch.Text = branch;
-        lblName.Text = user;
-        lblDate.Text = DateTime.Now.ToString();
+        
+        
         
     }
 
