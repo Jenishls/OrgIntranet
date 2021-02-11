@@ -27,11 +27,12 @@ public partial class PEP : System.Web.UI.Page
 
     protected void SearchByTagButton_Click(object sender, EventArgs e)
     {
-        
+
         String strConn = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
         SqlConnection conn = new SqlConnection(strConn);
         conn.Open();
         SqlCommand cmd = new SqlCommand("Select * FROM PepList WHERE UPPER(Name) LIKE UPPER(@SearchByTagTB) +'%' ", conn);
+        //SqlCommand cmd1 = new SqlCommand("select '' as MatchedName ,Self' as Relation, Name, Id from PepList where Name COLLATE SQL_Latin1_General_CP1_CI_AS like '%' + @SearchByTagTB +'%' Union select 'Father' as MatchedName ,Father' as Relation, Name, Id from PepList where Father COLLATE SQL_Latin1_General_CP1_CI_AS like '%' + @SearchByTagTB + '%' Union select 'Mother' as MatchedName ,Mother' as Relation, Name, Id from PepList where Mother COLLATE SQL_Latin1_General_CP1_CI_AS like '%'+ @SearchByTagTB +'%' Union select 'Son' as MatchedName ,Son' as Relation, Name, Id from PepList where Son COLLATE SQL_Latin1_General_CP1_CI_AS like '%' + @SearchByTagTB +'%' Union select 'Daughter' as MatchedName ,Daughter' as Relation, Name, Id from PepList where Daughter COLLATE SQL_Latin1_General_CP1_CI_AS like '%' + @SearchByTagTB + '%' Union select Spouse as MatchedName ,'Spouse' as Relation, Name, Id from PepList where Spouse COLLATE SQL_Latin1_General_CP1_CI_AS like '%' + @SearchByTagTB + '%' order by Id");
 
         SqlParameter search = new SqlParameter();
         search.ParameterName = "@SearchByTagTB";
@@ -39,8 +40,8 @@ public partial class PEP : System.Web.UI.Page
 
         cmd.Parameters.Add(search);
         SqlDataReader dr = cmd.ExecuteReader();
-        
-        if (dr.Read() && txtForwardTo !=null)
+
+        if (dr.Read() && txtForwardTo != null)
         {
             lblPName.Text = dr["Name"].ToString();
             lblORG.Text = dr["Organization"].ToString();
@@ -56,11 +57,11 @@ public partial class PEP : System.Web.UI.Page
             lblSon.Text = dr["Son"].ToString();
             lblDaughter.Text = dr["Daughter"].ToString();
             lblSpouse.Text = dr["Spouse"].ToString();
-           
+
             pnlTable.Visible = true;
-            
+
         }
-        else 
+        else
         {
             lblMsg.Visible = true;
             pnlTable.Visible = false;
@@ -75,9 +76,6 @@ public partial class PEP : System.Web.UI.Page
         conn.Close();
         btnPrint.Visible = true;
         pnl1.Visible = true;
-        
-        
-        
     }
 
     protected void btnPrint_Click(object sender, EventArgs e)

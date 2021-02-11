@@ -5,6 +5,44 @@
         .auto-style2 {
             color: #0000FF;
         }
+
+        .container{
+            display:flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: baseline;
+            align-content: space-between;
+        }
+
+        .item{
+            flex-basis: auto;
+
+        }
+        .auto-style3 {
+            text-align: left;
+            vertical-align: middle;
+            padding: 5px;
+            width: 92%;
+            border-bottom: 1px solid #e1e2e2;
+        }
+        .highlight{
+                background-color: #99FF99;
+                border: 1px solid black;
+                    box-shadow: inset 0 0 0 1000px gold;
+            } 
+
+        @media print {
+            body { 
+                     -webkit-print-color-adjust: exact; 
+                 }
+
+            .highlight{
+                background-color: #99FF99;
+                border: 1px solid black;
+                    box-shadow: inset 0 0 0 1000px gold;
+            } 
+ 
+         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -13,31 +51,32 @@
         function printpage() {
 
             var getpanel = document.getElementById("<%= Pep.ClientID%>");
-             var MainWindow = window.open('', '', 'height=600,width=800');
-             MainWindow.document.write('<html><head><title>Ncc Bank Ltd - Pep Search </title>');
-             MainWindow.document.write('</head><body>');
-             MainWindow.document.write(getpanel.innerHTML);
-             MainWindow.document.write('</body></html>');
-             MainWindow.document.close();
-             setTimeout(function () {
-                 MainWindow.print();
-             }, 500);
-             return false;
+            var MainWindow = window.open('', '', 'height=600,width=800');
+            MainWindow.document.write('<html><head><title>Ncc Bank Ltd - Pep Search </title>');
+            MainWindow.document.write('</head><body>');
+            MainWindow.document.write(getpanel.innerHTML);
+            MainWindow.document.write('</body></html>');
+            MainWindow.document.close();
+            setTimeout(function () {
+                MainWindow.print();
+            }, 500);
+            return false;
 
-         }
+        }
     </script>
 
 
 
     <div id="Pep" runat="server">
         <h3>NCC Pep Search:</h3>
+
         <table>
             <tr>
                 <td class="risklefttd">
                     <div style="float: left; font-weight: 700; color: #0000FF; font-size: large;">Search Name</div>
                     <div style="float: right">:</div>
                 </td>
-                <td class="riskrighttd">
+                <td class="auto-style3">
                     <script src="js/jquery.min.js" type="text/javascript"></script>
                     <script src="js/jquery-ui.min.js" type="text/javascript"></script>
                     <link href="js/jquery-ui.css" rel="Stylesheet" type="text/css" />
@@ -48,34 +87,66 @@
                                 function (request, response) {
                                     $.ajax({
                                         url: '<%=ResolveUrl("~/WebServicePep.asmx/GetPepList")%>',
-                                                                data: "{ 'prefix': '" + request.term + "'}",
-                                                                dataType: "json",
-                                                                type: "POST",
-                                                                contentType: "application/json; charset=utf-8",
-                                                                success: function (data) {
-                                                                    response($.map(data.d, function (item) {
-                                                                        return {
-                                                                            label: item.split('-')[0],
-                                                                            val: item.split('-')[1]
-                                                                        }
-                                                                    }))
-                                                                },
-                                                                error: function (response) {
-                                                                    alert(response.responseText);
-                                                                },
-                                                                failure: function (response) {
-                                                                    alert(response.responseText);
-                                                                }
-                                                            });
-                                                        },
-                                                        select: function (e, i) {
-                                                            $("[id$=hfUserId]").val(i.item.val);
-                                                        },
-                                                        minLength: 1
+                                        data: "{ 'prefix': '" + request.term + "'}",
+                                        dataType: "json",
+                                        type: "POST",
+                                        contentType: "application/json; charset=utf-8",
+                                        success: function (data) {
+                                            response($.map(data.d, function (item) {
+                                                if(item.split('-')[3] == 'Self')
+                                                {
+                                                    return{
+                                                        label: item.split('-')[1],
+                                                        val: item.split('-')[0]
+                                                    }
+                                                }
+                                                else{
+                                                    return{
+                                                        label: item.split('-')[2] +'-'+item.split('-')[3] + ' of (PEP)'+item.split('-')[1] ,
+                                                        val: item.split('-')[2] 
+                                                    }
+                                                }
+                                                
+                                            }))
+                                        },
+                                        error: function (response) {
+                                            alert(response.responseText);
+                                        },
+                                        failure: function (response) {
+                                            alert(response.responseText);
+                                        }
+                                    });
+                                },
+                                select: function (e, i) {
+                                   // $("[id$=hfUserId]").val()
+                                    let pepVal = i.item.value;
+                                    let arr = pepVal.split('(PEP)')
+                                    console.log(arr)
+                                    console.log(arr.length)
+                                    if(arr.length > 1){
+                                        arr1 = arr[0].split('-')
+                                        rel = arr1[1].split(' ')
+                                        console.log('PEP : '+arr[1])
+                                        console.log(rel[0])
+                                        console.log(arr1[0]) 
+                                        $("[id$=txtForwardTo]").val(arr1[0]);
+                                        $("[id$=hfUserId]").val(arr[1])
+                                        $('[id$=btnSearch]').attr('data-relation',rel[0]);
+                                    }
+                                    else{
+                                        $("[id$=hfUserId]").val(arr[0])
+                                        $('[id$=btnSearch]').attr('data-relation','Name')
+                                    }
+                                    
+                                },
+                                minLength: 1
                             });
 
                             $('[id$=btnSearch]').click(function (e) {
-                                let txtForwardTo = $("[id$=txtForwardTo]").val();
+                                //let txtForwardTo = $("[id$=txtForwardTo]").val();
+                                let relation = $(this).attr('data-relation');
+                                //console.log(relation);
+                                let txtForwardTo = $("[id$=hfUserId]").val();
                                 //console.log(txtForwardTo);
                                 e.preventDefault();
                                 $.ajax({
@@ -87,25 +158,47 @@
                                     success: function (data) {
                                         let a = JSON.parse(data.d)
                                         let display = '';
-                                        a.forEach(function (item, index) {
-                                            console.log(item)
-                                            display = display + `<br/> <hr/> <br/> <table>`
-                                            Object.keys(item).forEach(function (key) {
-
-                                                display = display + `
-                                                <tr>
-                                                <td style="width:200px">${key}
-                                                </td>
-                                                <td>   </td>
-                                                <td>
-                                                  ${item[key]}
-                                                </td>
-                                                </tr>` 
-                                            });
-                                            display = display + `</table>`
-                                        })
+                                        if (a.length > 0 ) {
+                                            
+                                            a.forEach(function (item, index) {
+                                                console.log(item)
+                                                display = display + `<br/> <hr/> <br/> <table>`
+                                                Object.keys(item).forEach(function (key) {
+                                                    //console.log(${key})
+                                                    if(key == relation)
+                                                    {
+                                                        display = display + `
+                                                    <tr>
+                                                    <td style="width:200px" class="highlight">${key}
+                                                        </td>
+                                                        <td>   </td>
+                                                        <td class="highlight">
+                                                          ${item[key]}
+                                                        </td>
+                                                        </tr>` 
+                                                    }
+                                                else{
+                                                        display = display + `
+                                                        <tr>
+                                                        <td style="width:200px">${key}
+                                                        </td>
+                                                        <td>   </td>
+                                                        <td>
+                                                            ${item[key]}
+                                                        </td>
+                                                        </tr>` 
+                                                    }
+                                                });
+                                                display = display + `</table>`
+                                            })
+                                        }
+                                        else{
+                                            display = `<h2 style='color: red'>No Data Found</h2>`;
+                                        }
                                         $('[id$=showData]').empty().append(display)
-                                        $('[id$=btnPrint]').show();
+                                        //$('[id$=btnPrint]').show();
+                                        
+                                        $('[id$=printBtn]').show();
                                         $('[id$=pnl1]').show();
                                     },
                                     error: function (response) {
@@ -117,14 +210,10 @@
                                 });
                             });
                         });
-
-
-  
                     </script>
-                     <script type="text/javascript">
-
-        </script>
-                    <asp:TextBox ID="txtForwardTo" runat="server" CssClass="textboxcss"></asp:TextBox>
+                    <script type="text/javascript">
+                    </script>
+                    <asp:TextBox ID="txtForwardTo" runat="server" CssClass="textboxcss" style="margin-top: 3vh; width : 40vw"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtForwardTo" ErrorMessage="Name Required" ForeColor="Red" ValidationGroup="a">*</asp:RequiredFieldValidator>
                     <asp:HiddenField ID="hfUserId" runat="server" />
                 </td>
@@ -137,7 +226,7 @@
         <asp:Label ID="lblMsg" runat="server" Visible="false" Text=""></asp:Label>
         <br />
         <asp:Panel ID="pnlTable" runat="server">
-        <table>
+            <table>
             <tr>
                 <td style="width:200px">Name of PEP
                 </td>
@@ -251,8 +340,7 @@
                 </td>
             </tr>
         </table>
-           
-            </asp:Panel>
+        </asp:Panel>
         <%--<center>   
  <asp:GridView ID="gvPeps" runat="server" EmptyDataText="Sorry, There is No Record To Display !!!" BackColor="#DEBA84" BorderColor="#DEBA84" BorderStyle="None" BorderWidth="3px" CellPadding="3" CellSpacing="2" >
      <FooterStyle BackColor="#F7DFB5" ForeColor="#8C4510" />
@@ -276,11 +364,18 @@
             <br />
             <br />
             <span class="auto-style2"><strong>Date:</strong></span>
-            <asp:Label ID="lblDate" runat="server" Text="" Style="font-weight: 700; background-color: #99FF99">></asp:Label>
+            <asp:Label ID="lblDate" runat="server" Text="" Style="font-weight: 700; background-color: #99FF99"></asp:Label>
         </asp:Panel>
     </div>
     <br />
-    <asp:Button ID="btnPrint" CssClass="btnMain btnGreen" runat="server" Text="Print" OnClientClick="return printpage();" OnClick="btnPrint_Click"  style ="display: none "/>
+    <asp:Button ID="btnPrint" CssClass="btnMain btnGreen" runat="server" Text="Print"  style ="display: none "  OnClientClick="return printpage();" OnClick="btnPrint_Click" />
+    <button type="button" class="btnMain btnGreen" id="printBtn" onclick="printJS({printable:'ContentPlaceHolder1_Pep', type: 'html', style: '.highlight { background-color: #99FF99;border: 1px solid black;box-shadow: inset 0 0 0 1000px gold; }' })" style ="display: none">
+        Print
+    </button>
+
+    <script src="js/print.js"></script>
+
+
            
 </asp:Content>
 

@@ -145,6 +145,15 @@ public partial class OpRiskApp : System.Web.UI.Page
         riskView(OpId); 
     }
 
+    protected void gdview_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        DataTable POpRisk = dra.GetAllPendingOpRisk();
+        gvPending.DataSource = POpRisk;
+        gvPending.DataBind();
+        gvPending.PageIndex = e.NewPageIndex;
+        gvPending.DataBind();
+    }
+
     protected void GridViewFilter_SelectedIndexChanged(object sender, EventArgs e)
     {
         string OpId = GridViewFilter.SelectedDataKey.Value.ToString();

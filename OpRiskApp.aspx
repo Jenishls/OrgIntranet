@@ -71,8 +71,8 @@
     <asp:Panel ID="pnlinfo" runat="server">
        <center>
         <asp:GridView ID="gvPending" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" DataKeyNames="OpId" 
-            OnSelectedIndexChanged="gvPending_SelectedIndexChanged" GridLines="None">
-            <AlternatingRowStyle BackColor="White" />
+            OnSelectedIndexChanged="gvPending_SelectedIndexChanged" GridLines="None" AllowPaging="true" OnPageIndexChanging="gdview_PageIndexChanging" pagesize='20'>
+            <AlternatingRowStyle BackColor="White"  />
             <Columns>
                 <asp:TemplateField HeaderText="S.N.">
                     <ItemTemplate><%#Container.DataItemIndex+1 %> </ItemTemplate></asp:TemplateField>
@@ -101,7 +101,8 @@
       <asp:Panel ID="PanelFilterTable" runat="server">
        <center>
         <asp:GridView ID="GridViewFilter" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" DataKeyNames="OpId" 
-            OnSelectedIndexChanged="GridViewFilter_SelectedIndexChanged" GridLines="None">
+            OnSelectedIndexChanged="GridViewFilter_SelectedIndexChanged" GridLines="None"
+             >
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:TemplateField HeaderText="S.N.">
