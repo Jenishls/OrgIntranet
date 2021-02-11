@@ -205,18 +205,22 @@ public partial class UserRelated : System.Web.UI.Page
             ddlLevel.SelectedItem.Text = dt.Rows[0]["Level"].ToString();
             if (ddlLevel.SelectedItem.Text == "A")
             {
+                ddlLevel.SelectedItem.Value = "A";
                 ddlLevel.SelectedItem.Text = "Assistant";
             }
             else if (ddlLevel.SelectedItem.Text == "O")
             {
+                ddlLevel.SelectedItem.Value = "O";
                 ddlLevel.SelectedItem.Text = "Officer";
             }
             else if (ddlLevel.SelectedItem.Text == "M")
             {
+                ddlLevel.SelectedItem.Value = "M";
                 ddlLevel.SelectedItem.Text = "Manager";
             }
             else if (ddlLevel.SelectedItem.Text == "E")
             {
+                ddlLevel.SelectedItem.Value = "E";
                 ddlLevel.SelectedItem.Text = "Executive";
             }
             ddlDesignation.SelectedItem.Text = dt.Rows[0]["Designation"].ToString();

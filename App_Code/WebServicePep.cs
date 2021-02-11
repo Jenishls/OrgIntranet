@@ -25,10 +25,12 @@ public class WebServicePep : System.Web.Services.WebService {
         //InitializeComponent(); 
     }
 
+
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string[] GetPepList(string prefix)
     {
+        //var pepList = new List<Pep>();
         List<string> Users = new List<string>();
         using (SqlConnection conn = new SqlConnection())
         {
@@ -36,8 +38,10 @@ public class WebServicePep : System.Web.Services.WebService {
                     .ConnectionStrings["myconnection"].ConnectionString;
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select Name, Address from PepList where " +
-                "Name like UPPER(@SearchText) + '%'";
+               // cmd.CommandText = "select Name, Address from PepList where " +
+                //"Name like UPPER(@SearchText) + '%'";
+                cmd.CommandText = "select top 20 Name as MatchedName ,'Self' as Relation, Name, Id from PepList where Name COLLATE SQL_Latin1_General_CP1_CI_AS like  @SearchText + '%' UNION select top 10 Father as MatchedName ,'Father' as Relation, Name, Id from PepList where Father COLLATE SQL_Latin1_General_CP1_CI_AS like @SearchText + '%' UNION select top 10 Mother as MatchedName ,'Mother' as Relation, Name, Id from PepList where Mother COLLATE SQL_Latin1_General_CP1_CI_AS like  @SearchText + '%' UNION select top 10 Son as MatchedName ,'Son' as Relation, Name, Id from PepList WHERE Son COLLATE SQL_Latin1_General_CP1_CI_AS like @SearchText + '%' UNION select top 10 Daughter as MatchedName ,'Daughter' as Relation, Name, Id from PepList WHERE Daughter COLLATE SQL_Latin1_General_CP1_CI_AS like  @SearchText + '%' UNION select top 10 Spouse as MatchedName ,'Spouse' as Relation, Name, Id from PepList WHERE Spouse COLLATE SQL_Latin1_General_CP1_CI_AS like  @SearchText + '%' order by Id";
+
                 cmd.Parameters.AddWithValue("@SearchText", prefix);
                 cmd.Connection = conn;
                 conn.Open();
@@ -45,13 +49,16 @@ public class WebServicePep : System.Web.Services.WebService {
                 {
                     while (sdr.Read())
                     {
-                        Users.Add(string.Format("{0}-{1}", sdr["Name"], sdr["Address"]));
+                        Users.Add(string.Format("{0}-{1}-{2}-{3}",sdr["Id"], sdr["Name"], sdr["MatchedName"], sdr["Relation"]) );
+                        //Users.add('',sdr['MatchedName']);
+                        //pepList.Add(new Pep { Id = sdr["Id"].ToString() , Name = sdr["Name"].ToString() , MatchedName = sdr["MatchedName"].ToString() , Relation = sdr["Relation"].ToString() });
                     }
                 }
                 conn.Close();
             }
             return Users.ToArray();
-        }
+            //return pepList.ToArray();
+         }
     }
 
     [WebMethod]
