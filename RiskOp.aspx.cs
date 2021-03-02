@@ -721,7 +721,7 @@ public partial class RiskOp : System.Web.UI.Page
         lblE2.Text = Convert.ToInt32(lblWE2.Text).ToString();
         lblEW2.Text = ddlE2.SelectedItem.Text;
         decimal E2 = Convert.ToDecimal(ddlE2.SelectedValue);
-        E2RWE.Text = (E1 * (Convert.ToInt32(lblWE2.Text))).ToString();
+        E2RWE.Text = (E2 * (Convert.ToInt32(lblWE2.Text))).ToString();
         lblE3.Text = Convert.ToInt32(lblWE3.Text).ToString();
         lblEW3.Text = ddlE3.SelectedItem.Text;
         E3RWE.Text = ((Convert.ToInt32(ddlE3.SelectedValue.ToString())) * (Convert.ToInt32(lblWE3.Text))).ToString();

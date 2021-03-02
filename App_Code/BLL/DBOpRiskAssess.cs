@@ -287,7 +287,7 @@ public class DBOpRiskAssess
                         ) unpiv
 
                         SELECT T.OpId,R.RiskIndicators, T.RId,T.BranchCode,T.[Year],T.[Month], T.value,
-						'Option'=T.value /(SELECT R.Weight FROM dbo.RiskIndicators R WHERE T.RId=R.RId) 
+						'Option'=T.value /(SELECT R.Weight FROM dbo.RiskIndicators R WHERE T.RId=R.RId and RiskVersion = 1) 
                         INTO #Temp1
 						FROM #Temp T INNER JOIN dbo.RiskIndicators R ON R.RId= T.RId
                         WHERE T.OpId=@a

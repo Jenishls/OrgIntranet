@@ -63,10 +63,10 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-   <div>
+    <div>
     <asp:Wizard ID="Wizard1" runat="server" 
         onfinishbuttonclick="Wizard1_FinishButtonClick" 
-        onnextbuttonclick="Wizard1_NextButtonClick" ActiveStepIndex="1" DisplayCancelButton="True" OnSideBarButtonClick="Wizard1_SideBarButtonClick" SideBarButtonStyle-BackColor="White" SideBarButtonStyle-ForeColor="#6699FF">
+        onnextbuttonclick="Wizard1_NextButtonClick" ActiveStepIndex="0" DisplayCancelButton="True" OnSideBarButtonClick="Wizard1_SideBarButtonClick" SideBarButtonStyle-BackColor="White" SideBarButtonStyle-ForeColor="#6699FF">
         <NavigationStyle BackColor="White" />
         <SideBarButtonStyle Font-Bold="False" Font-Underline="false" />
         <SideBarStyle HorizontalAlign="Left" VerticalAlign="Top" BackColor="White" BorderColor="White" BorderWidth="1px" Width="100px" />

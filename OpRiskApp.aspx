@@ -71,7 +71,7 @@
     <asp:Panel ID="pnlinfo" runat="server">
        <center>
         <asp:GridView ID="gvPending" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" DataKeyNames="OpId" 
-            OnSelectedIndexChanged="gvPending_SelectedIndexChanged" GridLines="None" AllowPaging="true" OnPageIndexChanging="gdview_PageIndexChanging" pagesize='20'>
+            OnSelectedIndexChanged="gvPending_SelectedIndexChanged" GridLines="None" >
             <AlternatingRowStyle BackColor="White"  />
             <Columns>
                 <asp:TemplateField HeaderText="S.N.">
