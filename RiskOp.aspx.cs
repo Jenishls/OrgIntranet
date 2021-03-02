@@ -463,6 +463,7 @@ public partial class RiskOp : System.Web.UI.Page
                 lblWG2.Text = drwg2.Rows[0]["Weight"].ToString();
                 ddlG2.Items.Insert(0, "Choose One");
             }
+            
             string idH1 = "H1";
             DataTable drih1 = dbri.GetIndicatorByRId(idH1);
             DataTable drwh1 = dbri.GetWeightByRId(idH1);

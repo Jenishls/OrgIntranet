@@ -19,7 +19,7 @@ public class DBRiskindicators
 
     public DataTable GetAllIndicators()
     {
-        DataTable dt = DAO.GetTable(null, "SELECT RId,RiskIndicators,[Weight],[Group] FROM RiskIndicators ORDER BY [Group]", CommandType.Text);
+        DataTable dt = DAO.GetTable(null, "SELECT RId,RiskIndicators,[Weight],[Group] FROM RiskIndicators ORDER BY [Group] and RiskVersion = '2' ", CommandType.Text);
         return dt;
     }
 
@@ -29,7 +29,7 @@ public class DBRiskindicators
         {
              new SqlParameter("@a",group)
         };
-        DataTable dt = DAO.GetTable(param, "SELECT 'Indicator'= RId+ ' '+ '-'+ ' ' +RiskIndicators,[Weight] FROM RiskIndicators WHERE [Group]=@a", CommandType.Text);
+        DataTable dt = DAO.GetTable(param, "SELECT 'Indicator'= RId+ ' '+ '-'+ ' ' +RiskIndicators,[Weight] FROM RiskIndicators WHERE [Group]=@a and RiskVersion = '2' ", CommandType.Text);
         return dt;
     }
 
@@ -39,7 +39,7 @@ public class DBRiskindicators
         {
              new SqlParameter("@a",id)
         };
-        DataTable dt = DAO.GetTable(param, "SELECT 'Indicator'= RId+ ' '+ '-'+ ' ' +RiskIndicators FROM RiskIndicators WHERE RId=@a", CommandType.Text);
+        DataTable dt = DAO.GetTable(param, "SELECT 'Indicator'= RId+ ' '+ '-'+ ' ' +RiskIndicators FROM RiskIndicators WHERE RId=@a and RiskVersion = '2'", CommandType.Text);
         return dt;
     }
 
@@ -49,7 +49,7 @@ public class DBRiskindicators
         {
              new SqlParameter("@a",id)
         };
-        DataTable dt = DAO.GetTable(param, "SELECT [Weight] FROM RiskIndicators WHERE RId=@a", CommandType.Text);
+        DataTable dt = DAO.GetTable(param, "SELECT [Weight] FROM RiskIndicators WHERE RId=@a and RiskVersion = '2' ", CommandType.Text);
         return dt;
     }
 }

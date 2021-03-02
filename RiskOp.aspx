@@ -63,10 +63,10 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-   <div>
+    <div>
     <asp:Wizard ID="Wizard1" runat="server" 
         onfinishbuttonclick="Wizard1_FinishButtonClick" 
-        onnextbuttonclick="Wizard1_NextButtonClick" ActiveStepIndex="1" DisplayCancelButton="True" OnSideBarButtonClick="Wizard1_SideBarButtonClick" SideBarButtonStyle-BackColor="White" SideBarButtonStyle-ForeColor="#6699FF">
+        onnextbuttonclick="Wizard1_NextButtonClick" ActiveStepIndex="7" DisplayCancelButton="True" OnSideBarButtonClick="Wizard1_SideBarButtonClick" SideBarButtonStyle-BackColor="White" SideBarButtonStyle-ForeColor="#6699FF">
         <NavigationStyle BackColor="White" />
         <SideBarButtonStyle Font-Bold="False" Font-Underline="false" />
         <SideBarStyle HorizontalAlign="Left" VerticalAlign="Top" BackColor="White" BorderColor="White" BorderWidth="1px" Width="100px" />
@@ -1084,24 +1084,25 @@
                         ForeColor="Red" InitialValue="Choose One" ValidationGroup="a">*</asp:RequiredFieldValidator>
                     </td>
                </tr>
-               <tr>
-                    <td class="risklefttd1">
-                        <asp:Label ID="lblGG2" runat="server" ></asp:Label>
-                    </td>
-                    <td class="riskrighttd1">
-                        <asp:Label ID="lblWG2" runat="server" ></asp:Label>
-                    </td>
-                    <td class="auto-style2">
-                        <asp:DropDownList ID="ddlG2" runat="server" cssclass="dropboxcss">
-                            <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
-                            <asp:ListItem Text="No" Value="5"></asp:ListItem>
-                        </asp:DropDownList>
-                    </td>
-                    <td class="riskrighttd">
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ControlToValidate="ddlG2" ErrorMessage="Select One" 
-                        ForeColor="Red" InitialValue="Choose One" ValidationGroup="a">*</asp:RequiredFieldValidator>
-                    </td>
-               </tr>
+            <tr>
+    <td class="risklefttd1">
+        <asp:Label ID="lblGG2" runat="server" ></asp:Label>
+    </td>
+    <td class="riskrighttd1">
+        <asp:Label ID="lblWG2" runat="server" ></asp:Label>
+    </td>
+    <td class="auto-style2">
+        <asp:DropDownList ID="ddlG2" runat="server" cssclass="dropboxcss">
+            <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
+            <asp:ListItem Text="No" Value="5"></asp:ListItem>
+        </asp:DropDownList>
+    </td>
+    <td class="riskrighttd">
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ControlToValidate="ddlG2" ErrorMessage="Select One" 
+        ForeColor="Red" InitialValue="Choose One" ValidationGroup="a">*</asp:RequiredFieldValidator>
+    </td>
+</tr>
+       
                </table>
                 
             </asp:WizardStep>
