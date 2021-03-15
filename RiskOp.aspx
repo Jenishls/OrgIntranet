@@ -66,7 +66,7 @@
     <div>
     <asp:Wizard ID="Wizard1" runat="server" 
         onfinishbuttonclick="Wizard1_FinishButtonClick" 
-        onnextbuttonclick="Wizard1_NextButtonClick" ActiveStepIndex="7" DisplayCancelButton="True" OnSideBarButtonClick="Wizard1_SideBarButtonClick" SideBarButtonStyle-BackColor="White" SideBarButtonStyle-ForeColor="#6699FF">
+        onnextbuttonclick="Wizard1_NextButtonClick" ActiveStepIndex="0" DisplayCancelButton="True" OnSideBarButtonClick="Wizard1_SideBarButtonClick" SideBarButtonStyle-BackColor="White" SideBarButtonStyle-ForeColor="#6699FF">
         <NavigationStyle BackColor="White" />
         <SideBarButtonStyle Font-Bold="False" Font-Underline="false" />
         <SideBarStyle HorizontalAlign="Left" VerticalAlign="Top" BackColor="White" BorderColor="White" BorderWidth="1px" Width="100px" />
@@ -217,6 +217,42 @@
                     </td>
                     <td class="riskrighttd1">
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="ddlA4" ErrorMessage="Select One" 
+                        ForeColor="Red" InitialValue="Choose One" ValidationGroup="a">*</asp:RequiredFieldValidator>
+                    </td>
+               </tr>
+               <tr>
+                    <td class="risklefttd1">
+                        <asp:Label ID="lblGA5" runat="server" ></asp:Label>
+                    </td>
+                    <td class="riskrighttd1">
+                        <asp:Label ID="lblW5" runat="server" ></asp:Label>
+                    </td>
+                    <td class="auto-style2">
+                        <asp:DropDownList ID="ddlA5" runat="server" cssclass="dropboxcss">
+                            <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="No" Value="5"></asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                    <td class="riskrighttd1">
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorA5" runat="server" ControlToValidate="ddlA5" ErrorMessage="Select One" 
+                        ForeColor="Red" InitialValue="Choose One" ValidationGroup="a">*</asp:RequiredFieldValidator>
+                    </td>
+               </tr>
+               <tr>
+                    <td class="risklefttd1">
+                        <asp:Label ID="lblGA6" runat="server" ></asp:Label>
+                    </td>
+                    <td class="riskrighttd1">
+                        <asp:Label ID="lblW6" runat="server" ></asp:Label>
+                    </td>
+                    <td class="auto-style2">
+                        <asp:DropDownList ID="ddlA6" runat="server" cssclass="dropboxcss">
+                            <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="No" Value="5"></asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                    <td class="riskrighttd1">
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorA6" runat="server" ControlToValidate="ddlA6" ErrorMessage="Select One" 
                         ForeColor="Red" InitialValue="Choose One" ValidationGroup="a">*</asp:RequiredFieldValidator>
                     </td>
                </tr>
@@ -387,7 +423,7 @@
                     </td>
                     <td class="auto-style2">
                          <asp:DropDownList ID="ddlC1" runat="server" cssclass="dropboxcss">
-                            <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="Yes" Value="0"></asp:ListItem>
                             <asp:ListItem Text="No" Value="5"></asp:ListItem>
                         </asp:DropDownList>
                     </td>
@@ -428,13 +464,9 @@
                     </td>
                     <td class="auto-style2">
                         <asp:DropDownList ID="ddlC3" runat="server" cssclass="dropboxcss">
-                            <asp:ListItem Text="0" Value="0"></asp:ListItem>
-                            <asp:ListItem Text=">0" Value="0.5"></asp:ListItem>
-                            <asp:ListItem Text=">=5000" Value="1"></asp:ListItem>
-                            <asp:ListItem Text=">=20000" Value="2"></asp:ListItem>
-                            <asp:ListItem Text=">=50000" Value="3"></asp:ListItem>
-                            <asp:ListItem Text=">=75000" Value="4"></asp:ListItem>
-                            <asp:ListItem Text=">=100000" Value="5"></asp:ListItem>
+                            <asp:ListItem Text="Yes" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="No" Value="5"></asp:ListItem>
+                            
                         </asp:DropDownList>
                     </td>
                     <td class="riskrighttd">
@@ -470,9 +502,13 @@
                     </td>
                     <td class="auto-style2">
                         <asp:DropDownList ID="ddlC5" runat="server" cssclass="dropboxcss">
-                            <asp:ListItem Text="Yes" Value="5"></asp:ListItem>
-                            <asp:ListItem Text="No" Value="1"></asp:ListItem>
-                            
+                            <asp:ListItem Text="0" Value="0"></asp:ListItem>
+                            <asp:ListItem Text=">0" Value="0.5"></asp:ListItem>
+                            <asp:ListItem Text=">=5000" Value="1"></asp:ListItem>
+                            <asp:ListItem Text=">=20000" Value="2"></asp:ListItem>
+                            <asp:ListItem Text=">=50000" Value="3"></asp:ListItem>
+                            <asp:ListItem Text=">=75000" Value="4"></asp:ListItem>
+                            <asp:ListItem Text=">=100000" Value="5"></asp:ListItem>
                         </asp:DropDownList>
                     </td>
                     <td class="riskrighttd">
@@ -685,8 +721,13 @@
                     </td>
                     <td class="auto-style2">
                         <asp:DropDownList ID="ddlD8" runat="server" cssclass="dropboxcss">
-                            <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
-                            <asp:ListItem Text="No" Value="5"></asp:ListItem>
+                            <asp:ListItem Text="No" Value="0.5"></asp:ListItem>
+                            <asp:ListItem Text="=<2" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="=<4" Value="2"></asp:ListItem>
+                            <asp:ListItem Text="=<6" Value="3"></asp:ListItem>
+                            <asp:ListItem Text="=<8" Value="4"></asp:ListItem>
+                            <asp:ListItem Text=">8" Value="5"></asp:ListItem>
+                           
                         </asp:DropDownList>
                     </td>
                     <td class="riskrighttd">
@@ -850,7 +891,7 @@
                         ForeColor="Red" InitialValue="Choose One" ValidationGroup="a">*</asp:RequiredFieldValidator>
                     </td>
                </tr>
-               <tr>
+              <tr>
                     <td class="risklefttd1">
                         <asp:Label ID="lblGE8" runat="server" ></asp:Label>
                     </td>
@@ -859,6 +900,24 @@
                     </td>
                     <td class="auto-style2">
                         <asp:DropDownList ID="ddlE8" runat="server" cssclass="dropboxcss">
+                            <asp:ListItem Text="Yes" Value="5"></asp:ListItem>
+                            <asp:ListItem Text="No" Value="0"></asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                    <td class="riskrighttd">
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorE8" runat="server" ControlToValidate="ddlE8" ErrorMessage="Select One" 
+                        ForeColor="Red" InitialValue="Choose One" ValidationGroup="a">*</asp:RequiredFieldValidator>
+                    </td>
+               </tr>
+               <tr>
+                    <td class="risklefttd1">
+                        <asp:Label ID="lblGE9" runat="server" ></asp:Label>
+                    </td>
+                    <td class="riskrighttd1">
+                        <asp:Label ID="lblWE9" runat="server" ></asp:Label>
+                    </td>
+                    <td class="auto-style2">
+                        <asp:DropDownList ID="ddlE9" runat="server" cssclass="dropboxcss">
                             <asp:ListItem Text="NA" Value="0"></asp:ListItem>
                             <asp:ListItem Text="0" Value="0.05"></asp:ListItem>
                             <asp:ListItem Text=">0" Value="0.5"></asp:ListItem>
@@ -870,7 +929,7 @@
                         </asp:DropDownList>
                     </td>
                     <td class="riskrighttd">
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator35" runat="server" ControlToValidate="ddlE8" ErrorMessage="Select One" 
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator35" runat="server" ControlToValidate="ddlE9" ErrorMessage="Select One" 
                         ForeColor="Red" InitialValue="Choose One" ValidationGroup="a">*</asp:RequiredFieldValidator>
                     </td>
                </tr>
@@ -903,8 +962,8 @@
                     </td>
                     <td class="auto-style2">
                         <asp:DropDownList ID="ddlF1" runat="server" cssclass="dropboxcss">
-                            <asp:ListItem Text="NA" Value="0"></asp:ListItem>
-                            <asp:ListItem Text="0" Value="0.05"></asp:ListItem>
+                            
+                            <asp:ListItem Text="0" Value="0"></asp:ListItem>
                             <asp:ListItem Text=">0" Value="0.5"></asp:ListItem>
                             <asp:ListItem Text=">=5" Value="1"></asp:ListItem>
                             <asp:ListItem Text=">=10" Value="2"></asp:ListItem>
@@ -927,8 +986,8 @@
                     </td>
                     <td class="auto-style2">
                         <asp:DropDownList ID="ddlF2" runat="server" cssclass="dropboxcss">
-                            <asp:ListItem Text="NA" Value="0"></asp:ListItem>
-                            <asp:ListItem Text="0" Value="0.05"></asp:ListItem>
+                            <asp:ListItem Text="0" Value="0"></asp:ListItem>
+                            
                             <asp:ListItem Text=">0" Value="0.5"></asp:ListItem>
                             <asp:ListItem Text=">=5" Value="1"></asp:ListItem>
                             <asp:ListItem Text=">=10" Value="2"></asp:ListItem>
@@ -951,8 +1010,8 @@
                     </td>
                     <td class="auto-style2">
                         <asp:DropDownList ID="ddlF3" runat="server" cssclass="dropboxcss">
-                            <asp:ListItem Text="NA" Value="0"></asp:ListItem>
-                            <asp:ListItem Text="0" Value="0.05"></asp:ListItem>
+                            <asp:ListItem Text="0" Value="0"></asp:ListItem>
+                            
                             <asp:ListItem Text=">0" Value="0.5"></asp:ListItem>
                             <asp:ListItem Text=">=5" Value="1"></asp:ListItem>
                             <asp:ListItem Text=">=10" Value="2"></asp:ListItem>
@@ -976,8 +1035,8 @@
                     <td class="auto-style2">
                         <asp:DropDownList ID="ddlF4" runat="server" cssclass="dropboxcss">
                             <asp:ListItem Text="Yes" Value="5"></asp:ListItem>
-                            <asp:ListItem Text="No" Value="0.5"></asp:ListItem>
-                            <asp:ListItem Text="NA" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="No" Value="0"></asp:ListItem>
+                            
                         </asp:DropDownList>
                     </td>
                     <td class="riskrighttd">
@@ -994,7 +1053,7 @@
                     </td>
                     <td class="auto-style2">
                         <asp:DropDownList ID="ddlF5" runat="server" cssclass="dropboxcss">
-                            <asp:ListItem Text="NA" Value="0"></asp:ListItem>
+                            
                             <asp:ListItem Text="No" Value="0.5"></asp:ListItem>
                             <asp:ListItem Text="<=2" Value="1"></asp:ListItem>
                             <asp:ListItem Text="<=4" Value="2"></asp:ListItem>
@@ -1020,7 +1079,7 @@
                         <asp:DropDownList ID="ddlF6" runat="server" cssclass="dropboxcss">
                             <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
                             <asp:ListItem Text="No" Value="5"></asp:ListItem>
-                            <asp:ListItem Text="NA" Value="0"></asp:ListItem>
+                            
                         </asp:DropDownList>
                     </td>
                     <td class="riskrighttd">
@@ -1084,24 +1143,7 @@
                         ForeColor="Red" InitialValue="Choose One" ValidationGroup="a">*</asp:RequiredFieldValidator>
                     </td>
                </tr>
-            <tr>
-    <td class="risklefttd1">
-        <asp:Label ID="lblGG2" runat="server" ></asp:Label>
-    </td>
-    <td class="riskrighttd1">
-        <asp:Label ID="lblWG2" runat="server" ></asp:Label>
-    </td>
-    <td class="auto-style2">
-        <asp:DropDownList ID="ddlG2" runat="server" cssclass="dropboxcss">
-            <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
-            <asp:ListItem Text="No" Value="5"></asp:ListItem>
-        </asp:DropDownList>
-    </td>
-    <td class="riskrighttd">
-    <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ControlToValidate="ddlG2" ErrorMessage="Select One" 
-        ForeColor="Red" InitialValue="Choose One" ValidationGroup="a">*</asp:RequiredFieldValidator>
-    </td>
-</tr>
+            
        
                </table>
                 
@@ -1349,7 +1391,7 @@
                         <asp:DropDownList ID="ddlJ1" runat="server" cssclass="dropboxcss">
                             <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
                             <asp:ListItem Text="No" Value="5"></asp:ListItem>
-                            <asp:ListItem Text="NA" Value="0"></asp:ListItem>
+                            
                         </asp:DropDownList>
                     </td>
                     <td class="riskrighttd">
@@ -1408,8 +1450,8 @@
                     </td>
                     <td class="auto-style2">
                         <asp:DropDownList ID="ddlK1" runat="server" cssclass="dropboxcss">
-                            <asp:ListItem Text="NA" Value="0"></asp:ListItem>
-                            <asp:ListItem Text="0" Value="0.5"></asp:ListItem>
+                            
+                            <asp:ListItem Text="0" Value="0"></asp:ListItem>
                             <asp:ListItem Text="<=2" Value="1"></asp:ListItem>
                             <asp:ListItem Text="<=4" Value="2"></asp:ListItem>
                             <asp:ListItem Text="<=6" Value="3"></asp:ListItem>
@@ -1432,8 +1474,8 @@
                     </td>
                     <td class="auto-style2">
                         <asp:DropDownList ID="ddlK2" runat="server" cssclass="dropboxcss">
-                            <asp:ListItem Text="NA" Value="0"></asp:ListItem>
-                            <asp:ListItem Text="0" Value="0.5"></asp:ListItem>
+                            
+                            <asp:ListItem Text="0" Value="0"></asp:ListItem>
                             <asp:ListItem Text="<=2" Value="1"></asp:ListItem>
                             <asp:ListItem Text="<=4" Value="2"></asp:ListItem>
                             <asp:ListItem Text="<=6" Value="3"></asp:ListItem>
@@ -1570,20 +1612,37 @@
                             <asp:Label ID="A4RWE" runat="server"></asp:Label>
                         </td>
                     </tr>
-                    <%--<tr>
-                        <td style="border: 1px solid black">
+
+                    <tr>
+                        <td >
                            A.5
                         </td>
-                        <td style="border: 1px solid black">
+                        <td >
                             <asp:Label ID="lblA5" runat="server"></asp:Label>
                         </td>
-                        <td style="border: 1px solid black">
+                        <td >
                             <asp:Label ID="lblWA5" runat="server"></asp:Label>
                         </td>
-                        <td style="border: 1px solid black">
+                        <td >
                             <asp:Label ID="A5RWE" runat="server"></asp:Label>
                         </td>
-                    </tr>--%>
+                    </tr>
+
+                    <tr>
+                        <td >
+                           A.6
+                        </td>
+                        <td >
+                            <asp:Label ID="lblA6" runat="server"></asp:Label>
+                        </td>
+                        <td >
+                            <asp:Label ID="lblWA6" runat="server"></asp:Label>
+                        </td>
+                        <td >
+                            <asp:Label ID="A6RWE" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+
                     <tr>
                         <td>
                            Total A
@@ -2110,6 +2169,20 @@
                         </td>
                         <td>
                             <asp:Label ID="E8RWE" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                           E.9
+                        </td>
+                        <td>
+                            <asp:Label ID="lblE9" runat="server"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Label ID="lblEW9" runat="server"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Label ID="E9RWE" runat="server"></asp:Label>
                         </td>
                     </tr>
                     <tr>

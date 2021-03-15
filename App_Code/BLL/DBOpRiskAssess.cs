@@ -17,13 +17,13 @@ public class DBOpRiskAssess
 		//
 	}
     public int CreateOpRiskAssess(string BranchCode, string Year, string Month,decimal TotalRWE,
-        string A1, string A2, string A3, string A4,
+        string A1, string A2, string A3, string A4,string A5,string A6,
         string B1, string B2, string B3, string B4, string B5,
         string C1, string C2, string C3, string C4, string C5, string C6,
         string D1, string D2, string D3, string D4, string D5, string D6, string D7, string D8,
-        string E1, string E2, string E3, string E4, string E5, string E6, string E7, string E8,
+        string E1, string E2, string E3, string E4, string E5, string E6, string E7, string E8, string E9,
         string F1, string F2, string F3, string F4, string F5, string F6, string F7,
-        string G1, string G2, 
+        string G1,  
         string H1, string H2, string H3, string H4, string H5, string H6,
         string I1, string I2, string I3,
         string J1, string J2,
@@ -40,7 +40,8 @@ public class DBOpRiskAssess
                     new SqlParameter("@A2",A2),
                     new SqlParameter("@A3",A3),
                     new SqlParameter("@A4",A4),
-                    //new SqlParameter("@A5",A5),
+                    new SqlParameter("@A5",A5),
+                    new SqlParameter("@A6",A6),
                         new SqlParameter("@B1",B1),
                         new SqlParameter("@B2",B2),
                         new SqlParameter("@B3",B3),
@@ -52,7 +53,7 @@ public class DBOpRiskAssess
                     new SqlParameter("@C4",C4),
                     new SqlParameter("@C5",C5),
                     new SqlParameter("@C6",C6),
-                    //new SqlParameter("@C7",C7),
+                    //  new SqlParameter("@C7",C7),
                         new SqlParameter("@D1",D1),
                         new SqlParameter("@D2",D2),
                         new SqlParameter("@D3",D3),
@@ -69,6 +70,7 @@ public class DBOpRiskAssess
                     new SqlParameter("@E6",E6),
                     new SqlParameter("@E7",E7),
                     new SqlParameter("@E8",E8),
+                    new SqlParameter("@E9",E9),
                         new SqlParameter("@F1",F1),
                         new SqlParameter("@F2",F2),
                         new SqlParameter("@F3",F3),
@@ -77,7 +79,7 @@ public class DBOpRiskAssess
                         new SqlParameter("@F6",F6),
                         new SqlParameter("@F7",F7),
                     new SqlParameter("@G1",G1),
-                    new SqlParameter("@G2",G2),
+                    
                         new SqlParameter("@H1",H1),
                         new SqlParameter("@H2",H2),
                         new SqlParameter("@H3",H3),
@@ -98,31 +100,31 @@ public class DBOpRiskAssess
 
         return DAO.IUD(param, @"insert into OpRiskAssess 
                        (BranchCode,Year,Month,TotalRWE,
-                        A1,A2,A3,A4,
+                        A1,A2,A3,A4,A5,A6,
                         B1,B2,B3,B4,B5,
                         C1,C2,C3,C4,C5,C6,
                         D1,D2,D3,D4,D5,D6,D7,D8,
-                        E1,E2,E3,E4,E5,E6,E7,E8,
+                        E1,E2,E3,E4,E5,E6,E7,E8,E9,
                         F1,F2,F3,F4,F5,F6,F7,
-                        G1,G2,
+                        G1,
                         H1,H2,H3,H4,H5,H6,
                         I1,I2,I3,
                         J1,J2,
                         K1,K2,
-                        CreatedBy,CreatedOn,Status,OpId)                                                                                                                                                                                                           
+                        CreatedBy,CreatedOn,Status,OpId,RiskVersion)                                                                                                                                                                                                           
                      values(@a,@b,@c,@d,
-                        @A1,@A2,@A3,@A4,
+                        @A1,@A2,@A3,@A4,@A5,@A6,
                         @B1,@B2,@B3,@B4,@B5,
                         @C1,@C2,@C3,@C4,@C5,@C6,
                         @D1,@D2,@D3,@D4,@D5,@D6,@D7,@D8,
-                        @E1,@E2,@E3,@E4,@E5,@E6,@E7,@E8,
+                        @E1,@E2,@E3,@E4,@E5,@E6,@E7,@E8,@E9,
                         @F1,@F2,@F3,@F4,@F5,@F6,@F7,
-                        @G1,@G2,
+                        @G1,
                         @H1,@H2,@H3,@H4,@H5,@H6,
                         @I1,@I2,@I3,
                         @J1,@J2,
                         @K1,@K2,
-                        @w,GETDATE(),@x,@y)", CommandType.Text);
+                        @w,GETDATE(),@x,@y,2)", CommandType.Text);
     }
 
     public DataTable GetRestMonth(string branch)
@@ -132,7 +134,7 @@ public class DBOpRiskAssess
              new SqlParameter("@a",branch)
         };
        
-        DataTable dt = DAO.GetTable(param, @"SELECT Month FROM dbo.Month WHERE Month NOT IN (SELECT Month FROM dbo.OpRiskAssess WHERE Year=2075 and BranchCode=@a)", CommandType.Text);
+        DataTable dt = DAO.GetTable(param, @"SELECT Month FROM dbo.Month WHERE Month NOT IN (SELECT Month FROM dbo.OpRiskAssess WHERE Year=2077 and BranchCode=@a)", CommandType.Text);
         return dt;
     }
 
@@ -277,31 +279,36 @@ public class DBOpRiskAssess
 
 
         DataTable dt = DAO.GetTable(param, @"
-                        SELECT *
+               SELECT *
                         INTO #Temp
                         FROM dbo.OpRiskAssess
                         UNPIVOT (
-                            value FOR RId IN (A1,A2,A3,A4,B1,B2,B3,B4,B5,C1,C2,C3,C4,C5,C6,
+                            value FOR RId IN (A1,A2,A3,A4,A5,A6,B1,B2,B3,B4,B5,C1,C2,C3,C4,C5,C6,
 	                        D1,D2,D3,D4,D5,D6,D7,D8,E1,E2,E3,E4,E5,E6,E7,E8,
                         F1,F2,F3,F4,F5,F6,F7,G1,G2,H1,H2,H3,H4,H5,H6,I1,I2,I3,J1,J2,K1,K2 )
-                        ) unpiv
+                        ) unpiv 
 
-                        SELECT T.OpId,R.RiskIndicators, T.RId,T.BranchCode,T.[Year],T.[Month], T.value,
-						'Option'=T.value /(SELECT R.Weight FROM dbo.RiskIndicators R WHERE T.RId=R.RId) 
+                        SELECT T.OpId,R.RiskIndicators, T.RId,T.BranchCode,T.[Year],T.[Month], T.value,T.RiskVersion,
+						'Option'=T.value /(SELECT R.Weight FROM dbo.RiskIndicators R WHERE T.RId=R.RId and RiskVersion = (select RiskVersion from OpRiskAssess where OpId = @a)) 
                         INTO #Temp1
-						FROM #Temp T INNER JOIN dbo.RiskIndicators R ON R.RId= T.RId
+						FROM #Temp T INNER JOIN dbo.RiskIndicators R ON R.RId= T.RId 
+						and R.RiskVersion = (select RiskVersion from OpRiskAssess where OpId = @a)
                         WHERE T.OpId=@a
+						--and T.RiskVersion = (select RiskVersion from OpRiskAssess where OpId = @a)
+                         
 
 						SELECT T.RId ,RiskIndicators,MAX(O.SelectedText) AS Selected,T.value AS Score 
 						FROM #Temp1 T INNER JOIN dbo.OpRiskValue O ON T.RId=O.RId
 						AND O.TextValue = T.[Option]
 						GROUP BY T.RId ,RiskIndicators,T.value
 						
-						
+						--select * from #Temp1 order By BranchCode, [Year]
 
                         ORDER BY 1,2,3,4
-
+            
                         DROP TABLE #Temp,#Temp1
+
+
                         ", CommandType.Text);
         return dt;
     }

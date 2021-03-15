@@ -121,15 +121,26 @@ public partial class RiskOp : System.Web.UI.Page
                 lblW4.Text = drwa4.Rows[0]["Weight"].ToString();
                 ddlA4.Items.Insert(0, "Choose One");
             }
-            //string idA5 = "A5";
-            //DataTable dria5 = dbri.GetIndicatorByRId(idA5);
-            //DataTable drwa5 = dbri.GetWeightByRId(idA5);
-            //{
+            string idA5 = "A5";
+            DataTable dria5 = dbri.GetIndicatorByRId(idA5);
+            DataTable drwa5 = dbri.GetWeightByRId(idA5);
+            {
 
-            //    lblGA5.Text = dria5.Rows[0]["Indicator"].ToString();
-            //    lblW5.Text = drwa5.Rows[0]["Weight"].ToString();
-            //    ddlA5.Items.Insert(0, "Choose One");
-            //}
+                lblGA5.Text = dria5.Rows[0]["Indicator"].ToString();
+                lblW5.Text = drwa5.Rows[0]["Weight"].ToString();
+                ddlA5.Items.Insert(0, "Choose One");
+            }
+
+            string idA6 = "A6";
+            DataTable dria6 = dbri.GetIndicatorByRId(idA6);
+            DataTable drwa6 = dbri.GetWeightByRId(idA6);
+            {
+
+                lblGA6.Text = dria6.Rows[0]["Indicator"].ToString();
+                lblW6.Text = drwa6.Rows[0]["Weight"].ToString();
+                ddlA6.Items.Insert(0, "Choose One");
+            }
+
             string idB1 = "B1";
             DataTable drib1 = dbri.GetIndicatorByRId(idB1);
             DataTable drwb1 = dbri.GetWeightByRId(idB1);
@@ -382,6 +393,16 @@ public partial class RiskOp : System.Web.UI.Page
                 lblWE8.Text = drwe8.Rows[0]["Weight"].ToString();
                 ddlE8.Items.Insert(0, "Choose One");
             }
+
+            string idE9 = "E9";
+            DataTable drie9 = dbri.GetIndicatorByRId(idE9);
+            DataTable drwe9 = dbri.GetWeightByRId(idE9);
+            {
+
+                lblGE9.Text = drie9.Rows[0]["Indicator"].ToString();
+                lblWE9.Text = drwe9.Rows[0]["Weight"].ToString();
+                ddlE9.Items.Insert(0, "Choose One");
+            }
             string idF1 = "F1";
             DataTable drif1 = dbri.GetIndicatorByRId(idF1);
             DataTable drwf1 = dbri.GetWeightByRId(idF1);
@@ -454,15 +475,15 @@ public partial class RiskOp : System.Web.UI.Page
                 lblWG1.Text = drwg1.Rows[0]["Weight"].ToString();
                 ddlG1.Items.Insert(0, "Choose One");
             }
-            string idG2 = "G2";
-            DataTable drig2 = dbri.GetIndicatorByRId(idG2);
-            DataTable drwg2 = dbri.GetWeightByRId(idG2);
-            {
+            //string idG2 = "G2";
+            //DataTable drig2 = dbri.GetIndicatorByRId(idG2);
+            //DataTable drwg2 = dbri.GetWeightByRId(idG2);
+            //{
 
-                lblGG2.Text = drig2.Rows[0]["Indicator"].ToString();
-                lblWG2.Text = drwg2.Rows[0]["Weight"].ToString();
-                ddlG2.Items.Insert(0, "Choose One");
-            }
+              //  lblGG2.Text = drig2.Rows[0]["Indicator"].ToString();
+              //  lblWG2.Text = drwg2.Rows[0]["Weight"].ToString();
+              //  ddlG2.Items.Insert(0, "Choose One");
+            // }
             
             string idH1 = "H1";
             DataTable drih1 = dbri.GetIndicatorByRId(idH1);
@@ -615,11 +636,19 @@ public partial class RiskOp : System.Web.UI.Page
         lblA4.Text =  Convert.ToInt32(lblW4.Text).ToString();
         lblWA4.Text = ddlA4.SelectedItem.Text;
         A4RWE.Text = ((Convert.ToInt32(ddlA4.SelectedValue.ToString())) * (Convert.ToInt32(lblW4.Text))).ToString();
+
+        lblA5.Text = Convert.ToInt32(lblW5.Text).ToString();
+        lblWA5.Text = ddlA5.SelectedItem.Text;
+        A5RWE.Text = ((Convert.ToInt32(ddlA5.SelectedValue.ToString())) * (Convert.ToInt32(lblW5.Text))).ToString();
+
+        lblA6.Text = Convert.ToInt32(lblW6.Text).ToString();
+        lblWA6.Text = ddlA6.SelectedItem.Text;
+        A6RWE.Text = ((Convert.ToInt32(ddlA6.SelectedValue.ToString())) * (Convert.ToInt32(lblW6.Text))).ToString();
         //lblA5.Text =  Convert.ToInt32(lblW5.Text).ToString();
         //lblWA5.Text = ddlA5.SelectedItem.Text;
         //A5RWE.Text = ((Convert.ToInt32(ddlA5.SelectedValue.ToString())) * (Convert.ToInt32(lblW5.Text))).ToString();
         //double A = Convert.ToDouble(A1RWE.Text) + Convert.ToDouble(A2RWE.Text) + Convert.ToDouble(A3RWE.Text) + Convert.ToDouble(A4RWE.Text) + Convert.ToDouble(A5RWE.Text) * Convert.ToDouble(lblAW.Text) ;
-        int A = Convert.ToInt32(A1RWE.Text) + Convert.ToInt32(A2RWE.Text) + Convert.ToInt32(A3RWE.Text) + Convert.ToInt32(A4RWE.Text); //* (Convert.ToInt32(lblAW.Text).ToString());
+        int A = Convert.ToInt32(A1RWE.Text) + Convert.ToInt32(A2RWE.Text) + Convert.ToInt32(A3RWE.Text) + Convert.ToInt32(A4RWE.Text) + Convert.ToInt32(A5RWE.Text) + Convert.ToInt32(A6RWE.Text); //* (Convert.ToInt32(lblAW.Text).ToString());
         decimal B = Convert.ToDecimal(lblA.Text);//Convert.ToInt32(lblAW.Text);
         decimal C = A * B;
         lblATW.Text = C.ToString("0.00");
@@ -662,9 +691,12 @@ public partial class RiskOp : System.Web.UI.Page
         lblC4.Text = Convert.ToInt32(lblWC4.Text).ToString();
         lblCW4.Text = ddlC4.SelectedItem.Text;
         C4RWE.Text = ((Convert.ToInt32(ddlC4.SelectedValue.ToString())) * (Convert.ToInt32(lblWC4.Text))).ToString();
+        
+        decimal C5 = Convert.ToDecimal(ddlC5.SelectedValue);
         lblC5.Text = Convert.ToInt32(lblWC5.Text).ToString();
         lblCW5.Text = ddlC5.SelectedItem.Text;
-        C5RWE.Text = ((Convert.ToInt32(ddlC5.SelectedValue.ToString())) * (Convert.ToInt32(lblWC5.Text))).ToString();
+        C5RWE.Text = (C5 * (Convert.ToInt32(lblWC5.Text))).ToString();
+
         lblC6.Text = Convert.ToInt32(lblWC6.Text).ToString();
         lblCW6.Text = ddlC6.SelectedItem.Text;
         decimal C6 = Convert.ToDecimal(ddlC6.SelectedValue);
@@ -679,7 +711,6 @@ public partial class RiskOp : System.Web.UI.Page
         decimal C = A * B;
         lblCTW.Text = C.ToString("0.00");
     }
-
     private void SummaryD()
     {
         lblD1.Text = Convert.ToInt32(lblWD1.Text).ToString();
@@ -706,7 +737,7 @@ public partial class RiskOp : System.Web.UI.Page
         D7RWE.Text = ((Convert.ToInt32(ddlD7.SelectedValue.ToString())) * (Convert.ToInt32(lblWD7.Text))).ToString();
         lblD8.Text = Convert.ToInt32(lblWD8.Text).ToString();
         lblDW8.Text = ddlD8.SelectedItem.Text;
-        D8RWE.Text = ((Convert.ToInt32(ddlD8.SelectedValue.ToString())) * (Convert.ToInt32(lblWD8.Text))).ToString();
+        D8RWE.Text = (2 * (Convert.ToInt32(lblWD8.Text))).ToString();
         decimal A = Convert.ToDecimal(D1RWE.Text) + Convert.ToDecimal(D2RWE.Text) + Convert.ToDecimal(D3RWE.Text) + Convert.ToDecimal(D4RWE.Text) + Convert.ToDecimal(D5RWE.Text) + Convert.ToDecimal(D6RWE.Text) + Convert.ToDecimal(D7RWE.Text) + Convert.ToDecimal(D8RWE.Text);
         //int A = Convert.ToInt32(D1RWE.Text) + Convert.ToInt32(D2RWE.Text) + Convert.ToInt32(D3RWE.Text) + Convert.ToInt32(D4RWE.Text) + Convert.ToInt32(D5RWE.Text) + Convert.ToInt32(D6RWE.Text) + Convert.ToInt32(D7RWE.Text);
         decimal B = Convert.ToDecimal(lblD.Text);
@@ -742,7 +773,16 @@ public partial class RiskOp : System.Web.UI.Page
         lblEW8.Text = ddlE8.SelectedItem.Text;
         decimal E8 = Convert.ToDecimal(ddlE8.SelectedValue);
         E8RWE.Text = (E8 * (Convert.ToInt32(lblWE8.Text))).ToString();
-        decimal A = Convert.ToDecimal(E1RWE.Text) + Convert.ToDecimal(E2RWE.Text) + Convert.ToDecimal(E3RWE.Text) + Convert.ToDecimal(E4RWE.Text) + Convert.ToDecimal(E5RWE.Text) + Convert.ToDecimal(E6RWE.Text) + Convert.ToDecimal(E7RWE.Text) + Convert.ToDecimal(E8RWE.Text);
+
+        lblE9.Text = Convert.ToInt32(lblWE9.Text).ToString();
+        lblEW9.Text = ddlE9.SelectedItem.Text;
+        decimal E9 = Convert.ToDecimal(ddlE9.SelectedValue);
+        E9RWE.Text = (E9 * (Convert.ToInt32(lblWE9.Text))).ToString();
+
+
+
+       
+        decimal A = Convert.ToDecimal(E1RWE.Text) + Convert.ToDecimal(E2RWE.Text) + Convert.ToDecimal(E3RWE.Text) + Convert.ToDecimal(E4RWE.Text) + Convert.ToDecimal(E5RWE.Text) + Convert.ToDecimal(E6RWE.Text) + Convert.ToDecimal(E7RWE.Text) + Convert.ToDecimal(E8RWE.Text) + Convert.ToDecimal(E9RWE.Text);
         //int A = Convert.ToInt32(E1RWE.Text) + Convert.ToInt32(E2RWE.Text) + Convert.ToInt32(E3RWE.Text) + Convert.ToInt32(E4RWE.Text) + Convert.ToInt32(E5RWE.Text) + Convert.ToInt32(E6RWE.Text) + Convert.ToInt32(E7RWE.Text) + Convert.ToInt32(E8RWE.Text);
         decimal B = Convert.ToDecimal(lblD.Text);//Convert.ToInt32(lblAW.Text);
         decimal C = A * B;
@@ -787,11 +827,9 @@ public partial class RiskOp : System.Web.UI.Page
         lblG1.Text = Convert.ToInt32(lblWG1.Text).ToString();
         lblGW1.Text = ddlG1.SelectedItem.Text;
         G1RWE.Text = (Convert.ToInt32(ddlG1.SelectedValue.ToString()) * (Convert.ToInt32(lblWG1.Text))).ToString();
-        lblG2.Text = Convert.ToInt32(lblWG2.Text).ToString();
-        lblGW2.Text = ddlG2.SelectedItem.Text;
-        G2RWE.Text = (Convert.ToInt32(ddlG2.SelectedValue.ToString()) * (Convert.ToInt32(lblWG2.Text))).ToString();
+       
 
-        decimal A = Convert.ToDecimal(G1RWE.Text) + Convert.ToDecimal(G2RWE.Text);
+        decimal A = Convert.ToDecimal(G1RWE.Text);
         decimal B = Convert.ToDecimal(lblG.Text);
         decimal C = A * B;
         lblGTW.Text = C.ToString("0.00");
@@ -939,9 +977,9 @@ public partial class RiskOp : System.Web.UI.Page
         string month1 = dm.Rows[0]["Value"].ToString();
         string OpId = branchcode + year + month1;
         DataTable dt = dusert.GetBranchBM(branchcode);
-        string emailbm = dt.Rows[0]["Email"].ToString();
-        string msender = Session["username"].ToString();
-        string receiver = emailbm;
+        //string emailbm = dt.Rows[0]["Email"].ToString();
+        //string msender = Session["username"].ToString();
+        //string receiver = emailbm;
         DataTable dt1 = dra.GetFileByOpId(OpId);
         if(dt1.Rows.Count>0)
         {
@@ -958,18 +996,18 @@ public partial class RiskOp : System.Web.UI.Page
         { 
        
             int i = dra.CreateOpRiskAssess(branchcode, year, month, Convert.ToDecimal(lblGT.Text),
-                A1RWE.Text, A2RWE.Text, A3RWE.Text, A4RWE.Text,
+                A1RWE.Text, A2RWE.Text, A3RWE.Text, A4RWE.Text,A5RWE.Text,A6RWE.Text,
                 B1RWE.Text, B2RWE.Text, B3RWE.Text, B4RWE.Text, B5RWE.Text,
-                C1RWE.Text, C2RWE.Text, C3RWE.Text, C4RWE.Text, C5RWE.Text, C6RWE.Text,
+                C1RWE.Text, C2RWE.Text, C3RWE.Text, C4RWE.Text, C5RWE.Text, C6RWE.Text, 
                 D1RWE.Text, D2RWE.Text, D3RWE.Text, D4RWE.Text, D5RWE.Text, D6RWE.Text, D7RWE.Text, D8RWE.Text,
-                E1RWE.Text, E2RWE.Text, E3RWE.Text, E4RWE.Text, E5RWE.Text, E6RWE.Text, E7RWE.Text, E8RWE.Text,
+                E1RWE.Text, E2RWE.Text, E3RWE.Text, E4RWE.Text, E5RWE.Text, E6RWE.Text, E7RWE.Text, E8RWE.Text, E9RWE.Text,
                 F1RWE.Text, F2RWE.Text, F3RWE.Text, F4RWE.Text, F5RWE.Text, F6RWE.Text, F7RWE.Text,
-                G1RWE.Text, G2RWE.Text,
+                G1RWE.Text, 
                 H1RWE.Text, H2RWE.Text, H3RWE.Text, H4RWE.Text, H5RWE.Text, H6RWE.Text,
                 I1RWE.Text, I2RWE.Text, I3RWE.Text,
                 J1RWE.Text, J2RWE.Text,
                 K1RWE.Text, K2RWE.Text,
-                msender, "P", OpId);
+                "TEST", "P", OpId);
 
             if (i > 0)
             {
