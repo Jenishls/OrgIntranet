@@ -300,6 +300,7 @@ public class DBOpRiskAssess
 						SELECT T.RId ,RiskIndicators,MAX(O.SelectedText) AS Selected,T.value AS Score 
 						FROM #Temp1 T INNER JOIN dbo.OpRiskValue O ON T.RId=O.RId
 						AND O.TextValue = T.[Option]
+and O.RiskVersion = (select RiskVersion from OpRiskAssess where OpId = @a)
 						GROUP BY T.RId ,RiskIndicators,T.value
 						
 						--select * from #Temp1 order By BranchCode, [Year]
@@ -372,6 +373,7 @@ public class DBOpRiskAssess
 						SELECT T.BranchCode,Year,Month, T.RId ,RiskIndicators,MAX(O.SelectedText) AS Selected,T.value AS Score 
 						FROM #Temp1 T INNER JOIN dbo.OpRiskValue O ON T.RId=O.RId
 						AND O.TextValue = T.[Option]
+                       and O.RiskVersion = T.RiskVersion
 						GROUP BY T.BranchCode,Year,Month,T.RId ,RiskIndicators,T.value
 						
 						
@@ -405,7 +407,7 @@ public class DBOpRiskAssess
                         F1,F2,F3,F4,F5,F6,F7,G1,G2,H1,H2,H3,H4,H5,H6,I1,I2,I3,J1,J2,K1,K2 )
                         ) unpiv
 
-                        SELECT R.RiskIndicators, T.RId,T.BranchCode,T.[Year],T.[Month], T.value,
+                        SELECT R.RiskIndicators, T.RId,T.BranchCode,T.[Year],T.[Month], T.value,T.RiskVersion
 						'Option'=T.value /(SELECT R.Weight FROM dbo.RiskIndicators R WHERE T.RId=R.RId) 
                         INTO #Temp1
 						FROM #Temp T INNER JOIN dbo.RiskIndicators R ON R.RId= T.RId
@@ -417,6 +419,7 @@ public class DBOpRiskAssess
 						SELECT T.BranchCode,Year,Month, T.RId ,RiskIndicators,MAX(O.SelectedText) AS Selected,T.value AS Score 
 						FROM #Temp1 T INNER JOIN dbo.OpRiskValue O ON T.RId=O.RId
 						AND O.TextValue = T.[Option]
+                        and O.RiskVersion = T.RiskVersion
                         WHERE T.BranchCode in (select BranchCode From BranchTable where Province = (select Province from BranchTable where BranchCode = @BranchCodeUser))
 						GROUP BY T.BranchCode,Year,Month,T.RId ,RiskIndicators,T.value
 						
