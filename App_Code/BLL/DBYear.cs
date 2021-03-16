@@ -35,7 +35,7 @@ public class DBYear
              new SqlParameter("@a",branch)
              
         };
-        DataTable dt = DAO.GetTable(param, @"SELECT  Month FROM dbo.Month WHERE Month NOT IN (SELECT Month FROM dbo.OpRiskAssess WHERE Year='2076' AND BranchCode=@a)", CommandType.Text);
+        DataTable dt = DAO.GetTable(param, @"SELECT  Month FROM dbo.Month WHERE Month NOT IN (SELECT Month FROM dbo.OpRiskAssess WHERE Year='2077' AND BranchCode=@a)", CommandType.Text);
         return dt;
     }
 

@@ -27,6 +27,7 @@
                       <asp:ListItem>2074</asp:ListItem>
                       <asp:ListItem>2075</asp:ListItem>
                       <asp:ListItem>2076</asp:ListItem>
+                      <asp:ListItem>2077</asp:ListItem>
                   </asp:DropDownList>
               </td>
           </tr>
@@ -71,7 +72,7 @@
     <asp:Panel ID="pnlinfo" runat="server">
        <center>
         <asp:GridView ID="gvPending" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" DataKeyNames="OpId" 
-            OnSelectedIndexChanged="gvPending_SelectedIndexChanged" GridLines="None" AllowPaging="true" OnPageIndexChanging="gdview_PageIndexChanging" pagesize='20'>
+            OnSelectedIndexChanged="gvPending_SelectedIndexChanged" GridLines="None">
             <AlternatingRowStyle BackColor="White"  />
             <Columns>
                 <asp:TemplateField HeaderText="S.N.">
@@ -192,6 +193,8 @@
                             </div>
                            <div style="float: left; margin-left:20px">
                 <asp:Button ID="btnDetails" runat="server" CssClass="btn" OnClick="btnDetails_Click" style="margin-left: 10px" Text="More Details"></asp:Button>
+                <asp:Button ID="filterBtnDetails" runat="server" CssClass="btn" OnClick="filter_btnDetails_Click" style="margin-left: 10px" Text="More Details"></asp:Button>
+
                             
                            </div>
                        </td>

@@ -41,9 +41,11 @@ public partial class OpRiskApp : System.Web.UI.Page
             //btnReject.Visible = true;
         }
 
+        
+        //    if (Lbranch > 990 || userid == "sabin1091" || userid == "mohan" || userid == "saroj.bhandari" || userid == "rajeshd" || userid == "kumari9" || dept == "BOD" || dept.Equals("Admin") || dept == "System" || userid == "sonam1468")
+        if (Lbranch > 990 || dept =="CRO" || dept == "OpRisk" || dept.Equals("OpRisk") || dept == "BOD"|| dept.Equals("Admin") || dept == "System"|| userid == "ramesh25" || dept.Equals("Admin") || userid == "pawan1348" || userid == "sonam1468" || userid == "jenish1416")            
+            
         {
-            if (Lbranch > 990 || userid == "sabin1091" || userid == "mohan" || userid == "saroj.bhandari" || userid == "rajeshd" || userid == "kumari9" || dept == "BOD" || dept.Equals("Admin") || dept == "System" || userid == "sonam1468")
-            {
                 btnRPT.Visible = true;
                 h3.Visible = false;
                 Panel2.Visible = true;
@@ -51,7 +53,7 @@ public partial class OpRiskApp : System.Web.UI.Page
             else {
                 Panel2.Visible = false;
             }
-        }
+        
 
         if (usertype == "IntraUser")
         {
@@ -142,12 +144,14 @@ public partial class OpRiskApp : System.Web.UI.Page
     protected void gvPending_SelectedIndexChanged(object sender, EventArgs e)
     {
         string OpId = gvPending.SelectedDataKey.Value.ToString();
+        filterBtnDetails.Visible = false;
         riskView(OpId); 
     }
 
     protected void gdview_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         DataTable POpRisk = dra.GetAllPendingOpRisk();
+       
         gvPending.DataSource = POpRisk;
         gvPending.DataBind();
         gvPending.PageIndex = e.NewPageIndex;
@@ -157,6 +161,7 @@ public partial class OpRiskApp : System.Web.UI.Page
     protected void GridViewFilter_SelectedIndexChanged(object sender, EventArgs e)
     {
         string OpId = GridViewFilter.SelectedDataKey.Value.ToString();
+        btnDetails.Visible = false;
         riskView(OpId);
     }
 
@@ -275,6 +280,23 @@ public partial class OpRiskApp : System.Web.UI.Page
         GridView1.DataBind();
 
        
+    }
+
+    protected void filter_btnDetails_Click(object sender, EventArgs e)
+    {
+        Panel2.Visible = false;
+        pnldata.Visible = false;
+        lblmsg.Visible = false;
+        pnlinfo.Visible = false;
+        Image1.Visible = false;
+        btnBack.Visible = true;
+        btnRPT.Visible = false;
+        string OpId = GridViewFilter.SelectedDataKey.Value.ToString();
+        DataTable dt = dra.GetFileByOpIdAll(OpId);
+        GridView1.DataSource = dt;
+        GridView1.DataBind();
+
+
     }
 
     private void LoadReport()
